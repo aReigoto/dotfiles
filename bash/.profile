@@ -46,11 +46,7 @@
 # 10.  OS specific @ .profile
 #
 #  ---------------------------------------------------------------------------
-# TODO: Discover were you are with varibles like
-#       $HOSTNAME
-#       $USER
-#       $OSTYPE
-#       $MACHTYPE
+
 ostype() { echo $OSTYPE | tr '[A-Z]' '[a-z]'; }
 
 export SHELL_PLATFORM='unknown'
@@ -60,7 +56,7 @@ case "$(ostype)" in
     SHELL_PLATFORM='linux'
     ;;
   *'darwin'*)
-    SHELL_PLATFORM='osx'
+    SHELL_PLATFORM='macOS'
     ;;
   *'bsd'*)
     SHELL_PLATFORM='bsd'
@@ -119,7 +115,7 @@ function git_branch {
   local git_status="$(git status 2> /dev/null)"
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
-#
+
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
     echo "$branch"
@@ -127,11 +123,6 @@ function git_branch {
     local commit=${BASH_REMATCH[1]}
     echo "$commit"
   fi
-}
-
-function git_pull_check {
-# if [[ $(git fetch --dry-run) =~ "remote" ]]; then echo " pull" ; fi
-    echo ""
 }
 
 function git_prmp() {
@@ -179,11 +170,12 @@ prmp4_1+="\$(git_prmp)"                                                         
 prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
-# 257 Color Prompt Genareted by USER and HOSTNAME vars
-USER_COLER=$(python3 -c "print (int.from_bytes(\"$USER\".encode(), byteorder='little') % 257)")
-HOST_COLER=$(python3 -c "print (int.from_bytes(\"$HOSTNAME\".encode(), byteorder='little') % 257)")
-prmp256_uh1="\[\e[38;5;${USER_COLER}m\]\u\[\e[0m\] "
-prmp256_uh1+="(\[\e[38;5;${HOST_COLER}m\]\h\[\e[0m\]) "
+# 256 Color Prompt Genareted by USER and HOSTNAME vars 
+USER_COLOR_256=$(python3 -c "print (int.from_bytes(\"$USER\".encode(), byteorder='big') % 256)")
+HOST_COLOR_256=$(python3 -c "print (int.from_bytes(\"$HOSTNAME\".encode(), byteorder='big') % 256)")
+
+prmp256_uh1="\[\e[38;5;${USER_COLOR_256}m\]\u\[\e[0m\] "
+prmp256_uh1+="(\[\e[38;5;${HOST_COLOR_256}m\]\h\[\e[0m\]) "
 prmp256_uh1+="\[\e[0;33m\]\w\[\e[0m\] "
 prmp256_uh1+="\$(git_prmp)"
 prmp256_uh1+="\n\[\e[0;33m\]$\[\e[0m\] "
@@ -263,7 +255,7 @@ fi
 #   OS specific
 #   ---------------------------------------
 
-if [[ $SHELL_PLATFORM =~ "osx" ]] ; then
+if [[ $SHELL_PLATFORM =~ "macOS" ]] ; then
   # ============ Brew request ===========
   export PATH="/usr/local/sbin:$PATH"
   export PATH="/usr/local/bin:/usr/local:$PATH"

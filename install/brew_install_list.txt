@@ -8,7 +8,6 @@ neovim
 // cloog
 // cscope
 // yasm
-// macvim --with-cscope --with-lua --with-override-system-vim
 octave
 gawk
 flac
