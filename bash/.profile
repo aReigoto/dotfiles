@@ -143,45 +143,60 @@ function git_prmp() {
     echo -e $gp
 }
 
-# Pronpt 1
+# Prompt 1
 prmp1_1="________________________________________________________________________________\n"
 prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
 prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
 prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
 prmp1_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
 prmp1_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                                               # pronpt
+prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                                               # prompt
 prmp1_2="| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "
 
-# Pronpt 2
+# Prompt 2
 prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                    # current folder
 prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
 prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
 prmp2_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
 prmp2_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # pronpt
+prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
 prmp2_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
-# Pronpt 3
+# Prompt 3
 prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                                                      # user name
 prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                                                    # pc local name
 prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
 prmp3_1+="(\[\$(git_color 2> /dev/null)\]"                                                      # colors git status
 prmp3_1+="\$(git_branch 2> /dev/null)\$(git_pull_check 2> /dev/null)$COLOR_RESET\])"            # prints current branch
-prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # pronpt
+prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
 prmp3_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
-# Pronpt 4
-prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\]"                                                    # user name
-prmp4_1+=" (\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                                                # pc local name
+# Prompt 4
+prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                                                   # user name
+prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                                                 # pc local name
 prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                                                 # current folder
 prmp4_1+="\$(git_prmp)"                                                                         # prints current branch
-prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # pronpt
+prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
+# 257 Color Prompt Genareted by USER and HOSTNAME vars
+USER_COLER=$(python3 -c "print (int.from_bytes(\"$USER\".encode(), byteorder='little') % 257)")
+HOST_COLER=$(python3 -c "print (int.from_bytes(\"$HOSTNAME\".encode(), byteorder='little') % 257)")
+prmp256_uh1="\[\e[38;5;${USER_COLER}m\]\u\[\e[0m\] "
+prmp256_uh1+="(\[\e[38;5;${HOST_COLER}m\]\h\[\e[0m\]) "
+prmp256_uh1+="\[\e[0;33m\]\w\[\e[0m\] "
+prmp256_uh1+="\$(git_prmp)"
+prmp256_uh1+="\n\[\e[0;33m\]$\[\e[0m\] "
+prmp256_uh2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
+
 # Select a prontp
-PS1=$prmp4_1
-PS2=$prmp4_2
+if [[ "$TERM" =~ 256color ]]; then
+    PS1=$prmp256_uh1
+    PS2=$prmp256_uh2
+else 
+    PS1=$prmp4_1
+    PS2=$prmp4_2
+fi
 
 export PS1
 export PS2
