@@ -1,0 +1,10 @@
+#Latex aux files
+*.texpadtmp*
+*.aux
+*.bbl
+*.blg
+*.pdf
+*.tco
+*.fls
+*.pdf
+

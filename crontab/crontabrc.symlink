@@ -1,0 +1,4 @@
+MAILTO=""
+#@weekly
+0 0 * * 0 . $HOME/.bash_profile; $HOME/.dotfiles/crontab/dotToGit.sh
+@weekly . $HOME/.bash_profile; echo "On ==>  $(date +%Y.%m.%d_%T) <=="  >> $HOME/logs/crontabLogs/brewUpgrade.log ; $HOME/.dotfiles/myBashScripts/brewUpGrade.sh >> $HOME/logs/crontabLogs/brewUpgrade.log

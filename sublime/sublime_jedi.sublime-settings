@@ -1,0 +1,13 @@
+{
+    // You can set a path to your python virtualenv,
+    // for example `/home/user/.virtualenvs/myenv)`.
+    // Note: Interpreter path would be found automaticaly
+    //"python_virtualenv":"$HOME/.local/share/virtualenvs/scrapingData-q5Y2bqCt",
+
+    // You can set a path to your python interpreter,
+    // for example `/home/user/.virtualenvs/myenv/bin/python)`.
+    //"python_interpreter": "$HOME/.local/share/virtualenvs/scrapingData-q5Y2bqCt/bin/python",
+
+    // Additional python package paths.
+    //"python_package_paths": ["$HOME/.local/share/virtualenvs/scrapingData-q5Y2bqCt//lib/python3.6/site-packages/"],
+}

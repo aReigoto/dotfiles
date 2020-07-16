@@ -1,0 +1,218 @@
+" ========================================
+" ============Plug config=================
+" ========================================
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+let OsType = system('echo "$OSTYPE"')
+" rapsberry -> linux-gnueabihf
+" macOS     -> darwin18.5.0
+" ubuntu    -> linux-gnu
+
+call plug#begin('~/.vim/plugged')
+" *** pi ***
+Plug 'benmills/vimux'
+Plug 'tpope/vim-surround'                                       " in vm S' ; in nm ysiw' or cs"=
+Plug 'scrooloose/nerdcommenter' | let nerdcommenterCheck = 1
+" *** pi ***
+Plug 'terryma/vim-multiple-cursors'                             "Ctrl-n, Ctrl-p, Ctrl-x, MultipleCursorsFind
+Plug 'kien/ctrlp.vim'                                           "fuzzy find files
+Plug 'bronson/vim-crosshairs'                                   " coursorline upgrade
+" Plug 'Yggdroot/indentLine'                                      " <Leader>il fancy indent guides with spaces only
+Plug 'raimondi/delimitmate'                                     " Close brackets
+Plug 'godlygeek/tabular' | let tabular =1
+" Plug 'python-mode/python-mode', { 'branch': 'develop' } | let pyMode =1
+Plug 'dhruvasagar/vim-zoom' | let vimZoom =1
+Plug 'triglav/vim-visual-increment'
+Plug 'tpope/vim-repeat'
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } | let Nerdtree = 1
+" Plug 'othree/eregex.vim' | let eregex = 1                       " :%S/ for substitute with perl regex
+" Plug 'coot/atp_vim'
+" Plug 'LaTeX-Box-Team/LaTeX-Box'
+" Plug 'nathanaelkane/vim-indent-guides'                        " <Leader>ig
+" Plug 'vim-scripts/LanguageTool'                               " not working
+" Plug 'rhysd/vim-grammarous'                                   " not working
+" Plug 'octol/vim-cpp-enhanced-highligh
+"=========== Color Plugs ===============
+" *** pi ***
+Plug 'vim-airline/vim-airline' | let AirLine = 1
+Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'
+" *** pi ***
+" Plug 'w0ng/vim-hybrid'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'sickill/vim-monokai'
+"===== Aduino =====
+" Plug 'stevearc/vim-arduino'
+" Plug 'jplaut/vim-arduino-ino'
+" Plug '4Evergreen4/vim-hardy'
+"============= Auto compleat and Snips ===========
+
+" === Defaut competaion and snips ===
+"if v:version > 704 || has('nvim') || v:version == 704 && has('patch1578')
+" Check if not raspberry
+if OsType !~ 'linux-gnueabihf'
+  "Plug 'ervandew/supertab' | let supertab = 1
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+   " create .ycm_extra_conf using Makefile
+   " use: YcmGenerateConfig
+  Plug 'Valloric/YouCompleteMe' , { 'do': './install.py --clang-completer' } | let Ycm = 1
+  Plug 'SirVer/ultisnips' | let UltiSnips = 1
+  Plug 'honza/vim-snippets'
+  "Plug 'Lokaltog/vim-powerline'
+else
+  " === competaion and snips good for clusters ===
+  " *** pi ***
+  Plug 'Shougo/neocomplcache' | let neocomplcache = 1
+  " snipmate dependencies
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'garbas/vim-snipmate'
+  Plug 'honza/vim-snippets'
+" *** pi ***
+endif
+
+"==== Experimenting ====
+"Plug 'easymotion/vim-easymotion'
+"Plug 'docunext/closetag.vim'                                   " close html and xml tags
+Plug 'mattn/emmet-vim'                                          " html css stuff
+Plug 'skammer/vim-css-color'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'                                       " git interation
+Plug 'mattn/webapi-vim'                                         " dependency gist-vim
+Plug 'mattn/gist-vim'                                           " create a git automaticly
+"Plug 'vim-syntastic/syntastic'                                 " plugin to check for errors
+
+" ========================================
+" =========== Plugins config =============
+" ========================================
+
+" ========== neocomplcache =========
+if exists("neocomplcache")
+  let g:neocomplcache_enable_at_startup = 1
+  " use <C-j> as <C-n> when popup menu is visable
+  autocmd VimEnter * inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
+  autocmd VimEnter * inoremap <expr><C-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
+endif
+
+" ========= YCM =========
+if exists("Ycm")
+  "echo "Ycm"
+  let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+  let g:ycm_confirm_extra_conf = 0
+  "New testing
+  let g:ycm_complete_in_comments = 1
+  let g:ycm_collect_identifiers_from_comments_and_strings = 1
+  let g:ycm_seed_identifiers_with_syntax = 1
+  let g:ycm_filetype_whitelist = { '*': 1 }
+  "let g:ycm_filetype_blacklist = { 'infolog' : 1 }
+endif
+
+" ======= UltilSnips/YCM/superTab key binding ========
+if exists("UltiSnips")
+  "========= 1 =========
+  if UltiSnips == 1
+  "echo "Ulti 1"
+    " make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-j>', '<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+    "let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+    "let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+    "let g:SuperTabDefaultCompletionType = '<C-j>'
+    " better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+  endif
+endif
+
+" ============= AirLine =============
+if exists("AirLine")
+  "echo "AirLine"
+  set laststatus=2 "to vim airline apear
+  let g:airline#extensions#tabline#enabled = 1                          "enable the list of buffers
+  let g:airline#extensions#tabline#buffer_idx_mode = 1                  "show bufer number
+  let g:airline#extensions#tabline#fnamemod = ':t'                      "show just the file name
+endif
+
+" ========== NERDTree ==========
+  "file drawer, open with :NERDTreeToggle
+if exists("Nerdtree")
+  "echo "NerdTree"
+  map <C-e> :NERDTreeToggle<CR>
+  "exit if NERDTree is the only buffer
+  "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  "autocmd StdinReadPre * let s:std_in=5
+  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif   " incompatible YCM
+endif
+
+" ======== Tabular ===========
+": Tab /'char to alin'
+":'<,'>Tab /:\zs|
+": Tab /'char to alin' |":'<,'>Tab /:\zs
+if exists("tabular")
+  "echo "tabular"
+  vmap <leader>t :Tab /
+  vmap <leader>T :Tab /\zs
+
+endif
+" ========== Nerd Commenter ==========
+if exists("nerdcommenterCheck")
+  "echo "nerdcommenterCheck"
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+  " Use compact syntax for prettified multi-line comments
+  let g:NERDCompactSexyComs = 1
+  " Align line-wise comment delimiters flush left instead of following code indentation
+  let g:NERDDefaultAlign = 'left'
+  " Set a language to use its alternate delimiters by default
+  let g:NERDAltDelims_java = 1
+  " Add your own custom formats or override the defaults
+  let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+  " Allow commenting and inverting empty lines (useful when commenting a region)
+  let g:NERDCommentEmptyLines = 1
+  " Enable trimming of trailing whitespace when uncommenting
+  let g:NERDTrimTrailingWhitespace = 1
+endif
+
+" ============== PyMode ================
+if exists("pyMode")
+  "echo "pyMode"
+  ":help pymode
+  " Override go-to.definition key shortcut to Ctrl-]
+  let g:pymode_rope_goto_definition_bind = "<C-]>"
+  " Override run current python file key shortcut to Ctrl-Shift-e
+  "let g:pymode_run_bind = "<C-S-e>"
+  let g:pymode_run_bind = '<leader>R'
+  " Override view python doc key shortcut to Ctrl-Shift-d
+  let g:pymode_doc_bind = "<C-S-d>"
+  " enable / desable folding
+  let g:pymode_folding = 0
+  let g:pymode_virtualenv = 1
+  let g:pymode_virtualenv_path = system("~/.dotfiles/scripts/python_path.sh")
+endif
+
+" ========== eregex ==========
+if exists("eregex")
+  "echo "eregex"
+  nnoremap <leader>/ :call eregex#toggle()<CR>
+  let g:eregex_default_enable = 0
+  let g:eregex_forward_delim = '/'
+  let g:eregex_backward_delim = '?'
+  " let g:eregex_force_case = 1
+endif
+
+if exists("vimZoom")
+  map <leader>z <C-w>m
+endif
+
+" ========================================
+call plug#end()
+" ========================================
+" ============ Plug END ==================
+" ========================================

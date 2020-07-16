@@ -1,0 +1,319 @@
+
+==============================================================================
+1. About                                                     *my-vim*
+Vim commands for customizing
+
+------------------------------------------------------------------------------
+Short cut: press * to go and # to come back
+
+*Vim-core*
+  |mappings|
+  |tabs|
+  |windows|
+  |Movement| 
+  |Markers|
+  |increment|
+  |decrement|
+  |matching-braces| 
+  |register| 
+  |regex|
+  |Foldind|
+  |Auto-Complete|
+  |<C-| 
+  |Control| keys in insert mode
+  |visual-block|
+
+
+*Plugins*
+  |multiple_cursor|
+  |vim-surrond||
+  ||tabular|
+  |vim-fugitive|
+  |coc|
+
+------------------------------------------------------------------------------
+
+  Vim sript help
+  https://devhints.io/vimscript
+
+  Vim Help
+   :help help.txt
+   :help helphelp
+
+  Vim documentation shot cuts, use tab wille typing 
+   :help CTRL
+
+  Vim default |mappings|
+   :help index
+   g ]   => to "open" a tag
+
+  List of all currently defined mappings
+   :map
+   :map-alt-keys
+   :map <C-p>
+
+  Check the scriptnames that were loaded
+   :scriptnames
+
+  Check the resistors content
+   :reg
+   :reg 0
+
+  Check status of current variable of vim
+   :set expandtab?
+
+  Execute a command a send STDOUT to buffer
+  :help :w_c
+    On the current line
+		:.!echo {1..5}
+	Rewite the whole buffer With
+		:%!echo {1..5}
+	Rewite a visual selecion
+		:'<,'>!echo {19..30}
+	Alternative
+		:r[ead] !echo {1..6}
+
+  |Modes|
+    Insert Mode 
+		i
+		I
+		o
+		O
+		A
+		a
+	Command Mode 
+		: 
+		Q (Ex-Mode execute multiple commnads)
+		From Insert Mode <C-O>
+	Replance Mode
+		R
+	Normal Mode
+		ESC
+	Visual Mode
+	:help Visual-mode
+		v
+		V		(visual line)
+		<C-V>	(visual block)
+	Select Mode 
+
+  Check Out Formating text  
+  :help formating
+  :[range]ce[nter] [width]
+  :[range]ri[ght] [width]
+  :[range]le[ft] [indent]
+
+  Buffers, Tabs and Windows defenition:
+    http://www.symbolundefined.com/index.php/2017/04/29/vim-buffers-windows-and-tabs/
+    A buffer is the in-memory text of a file.
+    A window is a viewport on a buffer.
+    A tab page is a collection of windows.
+   
+   == Usage of |tabs| ==
+   :tabe[dit] filename	Open filename in a new tab
+   :tabs Show a list of tabs
+   <C-W> T	Move current split window into its own tab
+   :q	Close window, closing tab if it contains a single window
+   :tabc[lose]	Close the current tab page and all its windows
+   :tabo[nly]	Close all tabs apart from the current one
+   gt	Move to next tab
+   gT	Move to previous tab
+   #gt Move to tab number #
+   
+   == Usage of |windows| ==
+   <C-W>=		resize windows equally 
+   <C-W>t<C-W>K	reshape split from vertically to horizontally
+   <C-W>t<C-W>H	reshape split from horizontally to vertically
+   :vsplit
+
+NOTE Vim commands for text editing
+
+  Check this manuals/sheat sheet:
+  http://vimdoc.sourceforge.net/vimum.html
+  http://bullium.com/support/vim.html
+  http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
+
+  Just a couple of vim commands to don't forget
+  vim registers http://www.brianstorti.com/vim-registers/
+  https://sanctum.geek.nz/arabesque/advanced-vim-registers/
+
+  |Movement|
+   *       => move to next matching word under the cursor
+   #       => move to previous matching word under the cursor
+   -       => first non-blank character of previos line
+   0       => go-to-beginning-of-line
+   ^       => first non-blank character of a line
+   _       => first non-blank character of a line 
+   $       => go-to-end-of-line
+   g_      => last non-blank character of a line
+   <C-o>   => move back cursor/file
+   <C-i>   => move forward cursor/file
+   D       => delete to the end of the line
+   d$      => delete to the end of the line
+   gs      => select the last pasted text
+
+   <C-p,n> => show completion options
+   <C-a>   => |increment| number or alphabetic character at or after the cursor
+   <C-x>   => |decrement| number or alphabetic character at or after the cursor
+   <C-x>   => completion options in insert mode
+
+  |Markers|
+   m[a-z] => create a marker named a to z on current position
+   m[A-Z] => cerate a marker named A to Z on current position across files
+   '[a-z] => go to first char of the line marked from a to z
+   `[a-z] => go to the exact char marked
+   ''     => go to the last jump
+
+  Move to |matching-braces|
+   %
+   <C-m>  => my mapping
+
+  In visual mode select your text an sort it on with command mode 
+   :'<,'>sort
+
+   In insert mode paste text from any |register|
+   <C-r> [your chosen register]
+   <C-r> "
+
+   Spetial |registers|
+	'"'     unnamed register, containing the text of
+				the last delete or yank
+    '0'		last yank
+	'1-9'   last delete (1) incrementing to (9)
+	'%'     current file name
+	'#'     alternate file name
+	'*'     clipboard contents (X11: primary selection)
+	'+'     clipboard contents
+	'/'     last search pattern
+	':'     last command-line
+	'-'     last small (less than a line) delete
+	'.'     last inserted text
+    '_'		black hole register
+	'q'		default macro register
+
+  To append to register just capitalize the |register|
+  "Ayiw
+
+  Access the expression |resistor| in insert mode and do some math
+   <C-r> =
+
+  Repeat the last macro or execute the default register "q
+   @@
+
+  Edite macro/register
+  Option 1 Use "" not '' 
+	:let @a="o<C-r>a\<Esc>"
+	:let @a="oHello World!\<CR>bye\<Esc>"
+  Option 2 Treat it like a normal register
+	paste the content of the macro and yank
+	back to the register cons: <C-*> wont work
+	and be carefull to not yank the end of line
+
+  Preform action on multiple files that are in buffers windows and tabs
+   :bufdo %s/pattern/replace/ge | update
+   :bufdo execute "normal! @a" | update
+   :windo
+   :tabdo
+
+  Argument list, this can be used to do a substitution on multiple files
+   :args `find . -name '*.txt'`
+   :args
+   :argdo :%s/bananas/morangos/g | w
+
+  |Foldind| commands
+   zc individual close
+   zo individual open
+   za individual toggle
+   zm folds all ; more folding
+   zr unfolds all ; reduce fold 
+   zf manual fold
+
+  Use Very Magic for the real |regex|
+  http://vimregex.com/
+   :help magic
+   /\v
+   :s/\v(CapturingGroup1|orSomethingElse)moreRegex stuf/NewStuf \1/
+
+  Afther a search you can do a subtitution just by doing
+   :s//NewStuf/
+
+  
+  perl  |  vim
+  (?:)     %()   => Non capture group
+  (?!)     ()@!  => negative lookaround
+  ()?      (){-} => as few as possible
+
+  Example to use with print py2 to print py3
+   %s/\v(^\s{-}print)\s+%(\()@!(.*)/\1(\2)/c
+
+  |Auto-Complete|
+   <C-X><C-L>    => Whole lines
+   <C-X><C-N>    => keywords in the current file
+   <C-X><C-K>    => keywords in 'dictionary'
+   <C-X><C-T>    => keywords in 'thesaurus', thesaurus-style
+   <C-X><C-I>    => keywords in the current and included files
+   <C-X><C-]>    => tags
+   <C-X><C-F>    => file names
+   <C-X><C-D>    => definitions or macros
+   <C-X><C-V>    => Vim command-line
+   <C-X><C-U>    => User defined completion
+   <C-X><C-O>    => omni completion
+   <C-X>_s       => Spelling suggestions
+   <C-N>         => keywords in 'complete' on buffer
+
+  |Control| keys in insert mode
+  <C-O>    allows execute one command in insert mode
+  <C-W>    delete word to the left of cursor
+  <C-O> D  delete everything to the right of cursor
+  <C-U>    delete everything to the left of cursor
+  <C-H>    backspace/delete
+  <C-J>    insert newline (easier than reaching for the return key)
+  <C-T>    indent current line
+  <C-D>    un-indent current line
+
+  |visual-block|
+  <C-V> I       visual block selecion and then insert mode I
+  <C-V> $A      to append at the end of the line 
+  <C-V> <       indentation !!
+  <C-V> >       indentation !!
+  <C-V>g<C-A>   iterate thou selection 
+
+*Plugins*
+
+  |multiple_cursor|
+  <C-n>
+
+  |vim-surrond|
+   normal mode options
+    cs'"            => change surround ' to "
+    ds"             => delete surround "
+    ysiw[           => add surround [] inner word
+    dst             => delete surround tag <a>HTML STILE</a>
+    cst<b>          => change surround tag to <b></b>
+   visual mode options
+    S'                => add surround '
+
+  |tabular|
+   Basic/Auto
+    :Tabularize /,                 => Aline the next lines concerning ,
+    :Tab /,                        => Just the same
+   Usage of lN cN rN for right center and left aligned, and N for the number of spaces
+   tabular will cycle the lN's for each line 
+    :Tabularize / => /l4l0         => this was the one used here, left aligned and 4 sapces ...
+   Advance regex
+    :Tabularize /regex/l1c2r3      => atom is defind in the regex them that is the match
+    :Tabularize /\v[.=]/r0c0l1c1l0
+
+  |vim-fugitive|
+   :Git add % | :Gwrite      => git add current file
+   :Git add .                => add all the files
+   :Gcommit .
+   :Gstatus                  => - to add selected file to commit list
+                             => p show selected file patchs changes | git add --patch
+                             => C to commit
+   :Gdiff                    => show diff between current file and the index
+   :Gdiff ~3                 => Diff between current file and current file 3 commits ago
+    .....
+
+  |vim-zoom|
+  <C-w>m          => zoom the current window (is is maped to <leader>z)
+  

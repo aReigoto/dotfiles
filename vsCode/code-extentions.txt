@@ -1,0 +1,15 @@
+azemoh.one-monokai
+jakethashi.vscode-angular2-emmet
+jdinhlife.gruvbox
+johnpapa.Angular2
+jsaulou.theme-by-language
+ms-vscode.sublime-keybindings
+ms-vscode.Theme-PredawnKit
+PKief.material-icon-theme
+ritwickdey.LiveServer
+rokoroku.vscode-theme-darcula
+teabyii.ayu
+tinkertrain.theme-panda
+vscodevim.vim
+wcwhitehead.bootstrap-3-snippets
+yedhrab.darkcode-theme-adopted-python-and-markdown

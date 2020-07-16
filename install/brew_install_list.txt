@@ -1,0 +1,32 @@
+// To not upgrade when running brewUpgrade.sh please insert # next to the brew formula
+bash
+git
+boost                           #
+gcc                             #
+neovim
+// cmake
+// cloog
+// cscope
+// yasm
+// macvim --with-cscope --with-lua --with-override-system-vim
+octave
+gawk
+flac
+htop
+ruby
+lame
+faad2
+mp4v2
+nmap
+jhead
+unrar
+wget
+tmux
+xclip
+reattach-to-user-namespace
+bash-completion
+brew-cask-completion
+pip-completion
+youtube-dl
+pyenv
+pipenv

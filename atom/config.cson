@@ -1,0 +1,87 @@
+"*":
+  Hydrogen:
+    autocomplete: false
+    showAutocompleteFirst: false
+  "atom-ide-ui":
+    "debugger-exceptionBreakpointsCollapsed": false
+  "autocomplete-python":
+    useKite: false
+    useSnippets: "required"
+  core:
+    customFileTypes:
+      profile: [
+        "Shell Script"
+      ]
+      "vimrc.vimPlugrc": [
+        "VimL"
+      ]
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "predawn-syntax"
+    ]
+  editor:
+    fontSize: 15
+    showIndentGuide: true
+    tabLength: 4
+    tabType: "soft"
+  "exception-reporting":
+    userId: "01d40c29-c850-4a70-9d7e-121cba0bd24e"
+  "ide-python":
+    pylsPlugins:
+      jedi_definition:
+        follow_builtin_imports: true
+        follow_imports: true
+      pycodestyle:
+        ignore: [
+          "E121"
+          "E123"
+          "E126"
+          "E226"
+          "E24"
+          "E704"
+          "W503"
+          "E402"
+          "E501"
+        ]
+      pydocstyle: {}
+  "linter-ui-default":
+    panelHeight: 215
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+  "platformio-ide-terminal":
+    ansiColors:
+      normal: {}
+      zBright:
+        brightBlue: "#000eff"
+    core: {}
+    style:
+      theme: "predawn"
+  "vim-mode-plus":
+    useClipboardAsDefaultRegister: true
+  welcome:
+    showOnStartup: false
+".breakpoints.hydrogen":
+  editor:
+    showIndentGuide: false
+".console.python.text":
+  editor:
+    showIndentGuide: true
+    showInvisibles: false
+".python.regexp.source":
+  editor:
+    preferredLineLength: 1000
+    scrollPastEnd: false
+    showIndentGuide: true
+    showInvisibles: false
+".python.source":
+  editor:
+    preferredLineLength: 1000
+    showIndentGuide: true
+    showInvisibles: false
+".python.text.traceback":
+  editor:
+    showIndentGuide: false
+    showInvisibles: true

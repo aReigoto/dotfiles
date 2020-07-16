@@ -1,0 +1,6 @@
+# Save a list of packages
+apm list --installed --bare > packages.list
+apm list --installed --bare > packages_local.list
+
+# Install the list of packages
+apm install --packages-file packages.list

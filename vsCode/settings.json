@@ -1,0 +1,58 @@
+{
+    // Window 
+    "window.zoomLevel": -1,
+    "workbench.settings.editor": "json",
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.settings.useSplitJSON": true,
+    // Python 
+    "python.venvPath": "~/.local/share/virtualenvs/",
+    "python.dataScience.askForKernelRestart": false,
+    // Edditor
+    "editor.fontSize": 16,
+    "editor.fontWeight": "500",
+    "editor.fontFamily": "Source Code Pro",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    // Debug
+    "debug.console.fontFamily": "Source Code Pro",
+    "debug.console.fontSize": 16,
+    // Terminal
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontWeight": "600",
+    // workbench
+    "workbench.activityBar.visible": true,
+    "workbench.editor.showTabs": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "DarkCode Theme Adopted Python and Markdown",
+    // breadcrumbs  
+    "breadcrumbs.enabled": true,
+    // theme by language
+    "theme-by-language.themes": {
+        "python": "DarkCode Theme Adopted Python and Markdown"
+    },
+    // vim
+    "vim.overrideCopy": false,
+    "vim.handleKeys": {
+        // Not Working!!
+        "<Cmd-d>": false,
+        "<C-d>": false
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "git.autofetch": true,
+//     //Trying to fix cmd d 
+//     "vim.insertModeKeyBindings": [
+//         {
+//             "before": ["j", "j"],
+//             "after": ["<esc>"]
+//         },
+//         {
+//             "before": ["Cmd+y"],
+//             "after": ["<esc>"]
+//         }
+//    ]
+}

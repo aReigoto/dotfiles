@@ -1,0 +1,15 @@
+# Saving
+code --list-extensions > ~/.dotfiles/vsCode/code-extentions.txt
+cp ~/Library/ApplicationSupport/Code/User/settings.json settings.json
+cp ~/Library/ApplicationSupport/Code/User/keybindings.json keybindings.json
+
+# Loding
+cp settings.json  ~/Library/ApplicationSupport/Code/User/settings.json
+cp keybindings.json  ~/Library/ApplicationSupport/Code/User/keybindings.json
+cat ~/.dotfiles/vsCode/code-extentions.txt | xargs -n 1 code --install-extension
+
+# Linking
+ln ~/.dotfiles/vsCode/keybindings.json  ~/Library/ApplicationSupport/Code/User/keybindings.json
+ln ~/.dotfiles/vsCode/settings.json  ~/Library/ApplicationSupport/Code/User/settings.json
+
+code --list-extensions | xargs -n 1 code --uninstall-extension

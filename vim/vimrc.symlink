@@ -1,0 +1,205 @@
+" ========================================
+" ============Plug config=================
+" ========================================
+" Automate the instalation of vim Plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+" Auto Compleat
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Python Virtual env
+Plug 'jmcantrell/vim-virtualenv'
+" NeerdTree
+Plug 'scrooloose/nerdtree'
+"Plug 'tsony-tsonev/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Icons
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim' 
+Plug 'scrooloose/nerdcommenter'
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+"Plug 'christoomey/vim-tmux-navigator'
+" Color Schemes
+Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+" TS Syntax
+"Plug 'HerringtonDarkholme/yats.vim'
+" AirLine
+Plug 'vim-airline/vim-airline' 
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+
+" ========================================
+" ==========General Settings==============
+" ========================================
+
+" Colorscheme
+"colorscheme Monokai
+
+silent! colorscheme gruvbox
+set bg=dark    " Setting dark mode
+"set bg=light   " Setting light mode
+
+set hidden                          " change buffer without saving
+set scrolloff=5                     " when scrolling all ways show 5 lines
+set autoread                        " detect when a file is changed
+set mouse+=a						" alow to resize windows with mouse
+" = disable auto comment =
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" ========================================
+" ============My Mappings=================
+" ========================================
+let mapleader = '\'
+
+nmap <leader><leader> :w<cr>    " shortcut to save
+" ========================================
+" =======My Commands & Funcions===========
+" ========================================
+command! HelpMe :vs ~/.vimhelp | set filetype=help
+
+function! NumberToggle()
+	if(&relativenumber == 1)
+		set norelativenumber
+		set nonumber
+	else
+		set number
+		set relativenumber
+	endif
+endfunc
+command! MyNumberToggle call NumberToggle()
+
+function! SetTabSize(size)
+	execute "set tabstop=".a:size
+	execute "set shiftwidth=".a:size
+	execute "set softtabstop=".a:size
+endfunction
+command! -nargs=1 MyTabSize call SetTabSize(<f-args>)
+MyTabSize 4
+
+function! Spell(...)
+    if a:0 == 0
+        echo '<leader>se En; <leader>sp Pt; in vm use z=; next ]s; prev [s; add zg; addS zG; wrong zw; wrongS sW;'
+        " <C-x><C-k> for options ; in v mode z= for sugestions
+    elseif a:000 == [ 'en' ]
+        set spell spelllang=en_ca
+    elseif a:000 == [ 'pt' ]
+        set spell spelllang=pt
+    elseif a:000 == [ 'n' ]
+        set nospell
+    endif
+endfunction
+command! -nargs=*  MySpell call Spell(<f-args>)
+
+" § ¦ ┆  │ • ¶ ÷ → ← ▶ ◀ ❮ ❯ ⟨ ⟩ ★ ♦ ◥  ¬ ↲ ↪ ↳ ≈ ¿ ◊ ˚ º ª ˆ ^ ˆ › ␣ · ⋅ ” ˝ Ω » © √ ∫ ¬ µ Å ß ∆ ƒ ˙ ˇ ¯ ‚ ’ ˛ Œ Æ ® ™ ¥ ‡ ˚ Ø ∏
+let g:IndentSts = '0'
+function! ViewSapcesTabsToggle(switch_)
+  if g:IndentSts== '0'
+    set list listchars=tab:┆⋅,eol:↲,trail:·,extends:⟩,precedes:⟨
+    set showbreak=↪\
+    let g:IndentSts = '1'
+  else
+    set showbreak=''
+    set nolist
+    let g:IndentSts = '0'
+  endif
+endfunction
+"call ViewSapcesTabsToggle(IndentSts)
+command! MyViewSapcesTabsToggle call ViewSapcesTabsToggle(IndentSts)
+
+function! FoldindToggle()
+  if &foldenable ==# "nofoldenable"
+    set foldenable
+    set foldcolumn=4
+    set foldminlines=3
+    set foldmethod=indent
+    " hi FoldColumn ctermfg=Black
+    hi FoldColumn ctermbg=239 ctermfg=244
+  else
+    set nofoldenable
+    set foldcolumn=0
+    set foldmethod=indent
+  endif
+endfunction
+map <leader>f :call FoldindToggle()<CR>
+command! MyFoldindToggle call FoldindToggle()
+MyFoldindToggle
+
+" ========================================
+" ============Plugins Mapings=============
+" ========================================
+" ------ NeerdTree -----
+nmap <leader>w :NERDTreeToggle<CR>
+
+" ------ ctrlp ------
+let g:ctrlp_map = '<leader>p' 
+
+" ------ NERDTree -----
+let NERDTreeShowHidden=1
+
+" ------ vim-airline ------
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#enabled = 1				" show buffers
+let g:airline#extensions#tabline#buffer_idx_mode = 1        " show bufer number
+
+" ----- Coc (Conquer of Completion) -----
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+	execute 'h '.expand('<cword>')
+  else
+	call CocAction('doHover')
+  endif
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use <tab> for both expand and jump (make expand higher priority.)
+" Option 1
+"inoremap <silent><expr> <TAB>
+	  "\ pumvisible() ? coc#_select_confirm() :
+	  "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  "\ <SID>check_back_space() ? "\<TAB>" :
+	  "\ coc#refresh()
+
+" Option 2
+inoremap <silent><expr> <TAB>
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" ========================================
+" ================Test Area===============
+" ========================================
+"autocmd VimEnter,VimLeave * silent !tmux set status
+"set cmdheight=2
+
+" Some one's config
+" disable vi compatibiliyt
+"set nocompatible
+
+" enable syntax andp plugins (for netrw)
+"syntax enable
+"filetype plugin on

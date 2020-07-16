@@ -1,0 +1,5 @@
+# Crontab commands
+crontab -l				# to see the existing crontab jobs
+crontab -u USER -l		# to see the jobs of USER
+crontab -e 				# to edit your crontab jobs; -u flag is all so available
+crontab some_file.txt	# to replace all the crontab jobs with the content of the file
