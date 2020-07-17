@@ -99,8 +99,7 @@ esac
 
 function git_color {
   local git_status="$(git status 2> /dev/null)"
-# if [[ ! $(git status 2> /dev/null | grep 'working \w\+ clean')  ]]; then
-  if [[ ! $(git status 2> /dev/null | grep 'working \(directory\|tree\) clean')  ]]; then
+  if [[ ! $git_status =~ "working (directory|tree) clean" ]]; then
     echo -e $COLOR_RED
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo -e $COLOR_YELLOW
@@ -113,6 +112,7 @@ function git_color {
 
 function git_branch {
   local git_status="$(git status 2> /dev/null)"
+  # 2 Regex
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
 
