@@ -128,46 +128,46 @@ function git_branch {
 function git_prmp() {
     local gp=""
     if ( git status &> /dev/null ) ; then
-        gp+="($(git_color 2> /dev/null)"                                                        # colors git status
-        gp+="$(git_branch 2> /dev/null)$(git_pull_check 2> /dev/null)$COLOR_RESET)"             # prints current branch
+        gp+="($(git_color 2> /dev/null)"                          # colors git status
+        gp+="$(git_branch 2> /dev/null)$COLOR_RESET)"             # prints current branch
     fi
     echo -e $gp
 }
 
 # Prompt 1
-prmp1_1="________________________________________________________________________________\n"
-prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
-prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
-prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
-prmp1_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
-prmp1_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                                               # prompt
+prmp1_1="_________________________________________________________\n"
+prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
+prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
+prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
+prmp1_1+="\[\$(git_color 2> /dev/null)\]"                         # colors git status
+prmp1_1+="\$(git_branch 2> /dev/null) \$COLOR_RESET\]"            # prints current branch
+prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                 # prompt
 prmp1_2="| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "
 
 # Prompt 2
-prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                    # current folder
-prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
-prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
-prmp2_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
-prmp2_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
+prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                      # current folder
+prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
+prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
+prmp2_1+="\[\$(git_color 2> /dev/null)\]"                         # colors git status
+prmp2_1+="\$(git_branch 2> /dev/null) \$COLOR_RESET\]"            # prints current branch
+prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp2_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
 # Prompt 3
-prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                                                      # user name
-prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                                                    # pc local name
-prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
-prmp3_1+="(\[\$(git_color 2> /dev/null)\]"                                                      # colors git status
-prmp3_1+="\$(git_branch 2> /dev/null)\$(git_pull_check 2> /dev/null)$COLOR_RESET\])"            # prints current branch
-prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
+prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                        # user name
+prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                      # pc local name
+prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
+prmp3_1+="(\[\$(git_color 2> /dev/null)\]"                        # colors git status
+prmp3_1+="\$(git_branch 2> /dev/null)\$COLOR_RESET\])"            # prints current branch
+prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp3_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
 # Prompt 4
-prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                                                   # user name
-prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                                                 # pc local name
-prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                                                 # current folder
-prmp4_1+="\$(git_prmp)"                                                                         # prints current branch
-prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # prompt
+prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                     # user name
+prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                   # pc local name
+prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                   # current folder
+prmp4_1+="\$(git_prmp)"                                           # prints current branch
+prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                 # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
 # 256 Color Prompt Genareted by USER and HOSTNAME vars 
@@ -181,8 +181,8 @@ prmp256_uh1+="\$(git_prmp)"
 prmp256_uh1+="\n\[\e[0;33m\]$\[\e[0m\] "
 prmp256_uh2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
-# Select a prontp
-if [[ "$TERM" =~ 256color ]]; then
+# Select a prompt
+if [[ "$TERM" =~ 256color && $USER_COLOR_256 =~ ^([0-9]+)$ ]]; then
     PS1=$prmp256_uh1
     PS2=$prmp256_uh2
 else 
