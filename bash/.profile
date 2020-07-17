@@ -170,10 +170,10 @@ prmp4_1+="\$(git_prmp)"                                                         
 prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
-# 257 Color Prompt Genareted by USER and HOSTNAME vars 
-# 0 is a bad color and +2 to do an extra shift
-USER_COLOR_256=$(python3 -c "print (int.from_bytes(\"$USER\".encode(), byteorder='big') % 254 + 2 )")
-HOST_COLOR_256=$(python3 -c "print (int.from_bytes(\"$HOSTNAME\".encode(), byteorder='big') % 254 + 2)")
+# 256 Color Prompt Genareted by USER and HOSTNAME vars 
+USER_COLOR_256=$(python3 -c "print (int.from_bytes(\"$USER\".encode(), byteorder='big') % 256)")
+HOST_COLOR_256=$(python3 -c "print (int.from_bytes(\"$HOSTNAME\".encode(), byteorder='big') % 256)")
+
 prmp256_uh1="\[\e[38;5;${USER_COLOR_256}m\]\u\[\e[0m\] "
 prmp256_uh1+="(\[\e[38;5;${HOST_COLOR_256}m\]\h\[\e[0m\]) "
 prmp256_uh1+="\[\e[0;33m\]\w\[\e[0m\] "
