@@ -74,22 +74,26 @@ fi
 
 #   Change Prompt
 #   ------------------------------------------------------------
+# https://www.gnu.org/software/bash/manual/html_node/Controlling-the-Prompt.html
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# Half of 16 color codes 
+#   The Other half is a brither version and starts at 90m
+COLOR_BLACK="\033[0;30m"
 COLOR_RED="\033[0;31m"
-COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
-COLOR_OCHRE="\033[38;5;95m"
+COLOR_YELLOW="\033[0;33m"
 COLOR_BLUE="\033[0;34m"
+COLOR_PINK="\033[0;35m"
 COLOR_SOFT_BLUE="\033[0;36m"
 COLOR_WHITE="\033[0;37m"
-COLOR_PINK="\033[1;33m"
 COLOR_RESET="\033[0m"
 
 #Define colors depending on the machine
 case $HOSTNAME in
-MBPaR* | iMac*)
+ndre* )
   HOST_COLOR=$COLOR_SOFT_BLUE
   ;;
-search6 | lip*)
+search* | lip* | lx*)
   HOST_COLOR=$COLOR_RED
   ;;
 *)
@@ -106,7 +110,7 @@ function git_color {
   elif [[ $git_status =~ "nothing to commit" ]]; then
     echo -e $COLOR_GREEN
   else
-    echo -e $COLOR_OCHRE
+    echo -e $COLOR_BLUE
   fi
 }
 
@@ -139,8 +143,7 @@ prmp1_1="_________________________________________________________\n"
 prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
 prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
 prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
-prmp1_1+="\[\$(git_color 2> /dev/null)\]"                         # colors git status
-prmp1_1+="\$(git_branch 2> /dev/null) \$COLOR_RESET\]"            # prints current branch
+prmp1_1+="\$(git_prmp)"                                           # prints colored git info
 prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                 # prompt
 prmp1_2="| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "
 
@@ -148,8 +151,7 @@ prmp1_2="| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "
 prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                      # current folder
 prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
 prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
-prmp2_1+="\[\$(git_color 2> /dev/null)\]"                         # colors git status
-prmp2_1+="\$(git_branch 2> /dev/null) \$COLOR_RESET\]"            # prints current branch
+prmp2_1+="\$(git_prmp)"                                           # prints colored git info
 prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp2_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
@@ -157,8 +159,7 @@ prmp2_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                        # user name
 prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                      # pc local name
 prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
-prmp3_1+="(\[\$(git_color 2> /dev/null)\]"                        # colors git status
-prmp3_1+="\$(git_branch 2> /dev/null)\$COLOR_RESET\])"            # prints current branch
+prmp3_1+="\$(git_prmp)"
 prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp3_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
@@ -166,7 +167,7 @@ prmp3_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                     # user name
 prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                   # pc local name
 prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                   # current folder
-prmp4_1+="\$(git_prmp)"                                           # prints current branch
+prmp4_1+="\$(git_prmp)"                                           # prints colored git info
 prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                 # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
