@@ -201,6 +201,7 @@ export PATH="$PATH:$HOME/.local/scripts"
 #   Set Default Editor
 #   ------------------------------------------------------------
 type nvim >/dev/null 2>&1 && export EDITOR=nvim
+
 #   Set default blocksize for ls, df, du
 #   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
 #   ------------------------------------------------------------
@@ -210,9 +211,13 @@ export BLOCKSIZE=1k
 #   (this is all commented out as I use Mac Terminal Profiles)
 #   from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 #   ------------------------------------------------------------
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
+if [[ $SHELL_PLATFORM =~ macOS ]]; then  
+	export CLICOLOR=1
+	export LSCOLORS=gxfxcxdxbxegedabagaced
+elif [[ $SHELL_PLATFORM =~ linux ]]; then
+	LS_COLORS=$(echo $LS_COLORS | sed -re 's/di=[0-9;]+:/di=0;94:/' -e 's/ln=[0-9;]+:/ln=0;95:/' )
+	export LS_COLORS
+fi
 
 export HISTSIZE=10000
 export HISEFILESIZE=10000
@@ -244,7 +249,7 @@ iTermColor() {
 }
 
 if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp
-     TTY_temp=$(tty)
+     local TTY_temp=$(tty)
      # TTY=${TTY_temp#*/*/}
      TTY=${TTY_temp#*/*/ttys}
      iTermColor "ttys${TTY}"
