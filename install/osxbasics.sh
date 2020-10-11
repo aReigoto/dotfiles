@@ -49,6 +49,9 @@ defaults write com.apple.screencapture type jpg
 #Change Where Screen Shots Are Saved To
 defaults write com.apple.screencapture location ~/Desktop/Screenshots/
 
+#Change name of screencapture
+defaults write com.apple.screencapture name -string `date '+%y-%m-%d_%H.%M.%S'`
+
 #ScheduleFrequency set to one day
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 

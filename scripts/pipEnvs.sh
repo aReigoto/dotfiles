@@ -10,6 +10,7 @@ cmd=0
 opn=0
 inf=0
 atm=0
+sch=0
 
 myName="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
@@ -21,6 +22,7 @@ Where:
         -c | --command      Send a command to a virtualenv
         -o | --open         Open a shell in the virtualenv
         -i | --info         Info about the virtualenv
+        -s | --search       Search a package in virtualenvs
         -a | --atom         Open atom from virtualenv
         -h | --help         Help?"
 
@@ -77,7 +79,7 @@ choice_handler(){
             #echo $1
             env_n=$1
             shift
-             ;;
+            ;;
         c | -c | --command)
             #echo "Command Otion"
             #echo $1 $2
@@ -99,6 +101,11 @@ choice_handler(){
             opn=1
             shift
             ;;
+        s | -s | --search)
+			sch=$2
+			shift
+			shift
+			;;
         i | -i | --info)
             #echo "Info Option"
             #echo $@
@@ -135,21 +142,46 @@ else
 	choice_handler $choice
 fi
 
-if (( $atm == 1 && $env_n > 0 )) ; then
+if [[ $atm == 1 && $env_n > 0 ]] ; then
     source $(log_in_by_key $env_n)/bin/activate; atom .
-elif (( $cmd == 1 && $env_n > 0 )) ; then
+elif [[ $cmd == 1 && $env_n > 0 ]] ; then
     read -e -p "Type your command`echo $'\n> '`" cmmd
     source $(log_in_by_key $env_n)/bin/activate; $cmmd
-elif (( $opn == 1 && $env_n > 0 )) ; then
+elif [[ $opn == 1 && $env_n > 0 ]] ; then
     bash --rcfile <(echo ". ~/.bashrc; source $(log_in_by_key $env_n)/bin/activate")
-elif (( $inf == 1 && $env_n > 0 )) ; then
-    echo -e "\nTo activate manualy:"
-    echo "source $(log_in_by_key $env_n)/bin/activate"
+elif [[ $inf == 1 && $env_n > 0 ]] ; then
+    echo 
+    echo "Version:"
+    echo $($(log_in_by_key $env_n)/bin/python --version)
     echo
-    echo "Execatable and site-packages:"
+    echo "Original project folder:"
+    echo $(cat $(log_in_by_key $env_n)/.project)
+    echo 
+    echo "To activate manualy:"
+    echo "source $(log_in_by_key $env_n)/bin/activate"
+    echo "To exit the venv type: deactivate"
+    echo
+    echo "Executable and site-packages:"
     echo $(log_in_by_key $env_n)/bin/python
-    echo $(log_in_by_key $env_n)/python*/site-packages
+    echo "$(log_in_by_key $env_n)/lib/python*/site-packages"
+elif [[ sch != 0 ]] ; then	
+	for key in "${!dic_folders[@]}"; do
+		
+		project_folder=$(cat ${dic_folders[$key]}/.project)
+		lib_folder=${dic_folders[$key]}/lib/python*/site-packages
+
+		echo
+		echo $(basename ${dic_folders[$key]})
+
+		if [[ -f $project_folder/Pipfile ]] ; then
+			grep $sch $project_folder/Pipfile
+			grep $sch $project_folder/Pipfile.lock
+		fi
+		find $lib_folder -iname $sch
+		find $lib_folder -iname ".*${sch}.*"
+	done
 fi
+
 
 
 unset env_n
@@ -158,6 +190,8 @@ unset opn
 unset inf
 unset atm
 unset cmmd
+unset sch
+unset pth
 
 unset i
 unset venvs_folder
@@ -169,6 +203,8 @@ unset folder
 unset counter
 unset key
 unset choice
+unset project_folder
+unset lib_folder
 unset -f add_destination
 unset -f print_dic
 unset -f save_to_file

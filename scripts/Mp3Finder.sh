@@ -26,7 +26,8 @@ where:
     -h : show this help text
 
 exemple:
-$(basename ${BASH_SOURCE[0]}) -lo -r \".*conrad.*\.mp3\""
+$(basename ${BASH_SOURCE[0]}) -lo -r \".*conrad.*\.mp3\"
+$(basename ${BASH_SOURCE[0]}) -z \".*conrad.*\.mp3\""
 
 #Loop truu the ags
 # If option expects an arg then must have : after

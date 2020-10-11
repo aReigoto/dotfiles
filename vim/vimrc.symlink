@@ -51,9 +51,12 @@ set bg=dark    " Setting dark mode
 set hidden                          " change buffer without saving
 set scrolloff=5                     " when scrolling all ways show 5 lines
 set autoread                        " detect when a file is changed
-set mouse+=a						" alow to resize windows with mouse
+set mouse+=a						" allow to resize windows with mouse
 " = disable auto comment =
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Set split order 
+set splitbelow splitright
 
 " ========================================
 " ============My Mappings=================
@@ -62,7 +65,7 @@ let mapleader = '\'
 
 nmap <leader><leader> :w<cr>    " shortcut to save
 " ========================================
-" =======My Commands & Funcions===========
+" =======My Commands & Functions===========
 " ========================================
 command! HelpMe :vs ~/.vimhelp | set filetype=help
 
@@ -87,7 +90,8 @@ MyTabSize 4
 
 function! Spell(...)
     if a:0 == 0
-        echo '<leader>se En; <leader>sp Pt; in vm use z=; next ]s; prev [s; add zg; addS zG; wrong zw; wrongS sW;'
+		" Check https://vim-jp.org/vimdoc-en/popup.html#popup_create() to create a popup window"
+        echo 'options: [en,pt,n] \n in vm use z=; next ]s; prev [s; add zg; addS zG; wrong zw; wrongS sW;'
         " <C-x><C-k> for options ; in v mode z= for sugestions
     elseif a:000 == [ 'en' ]
         set spell spelllang=en_ca
@@ -203,3 +207,13 @@ let g:coc_snippet_next = '<tab>'
 " enable syntax andp plugins (for netrw)
 "syntax enable
 "filetype plugin on
+
+function! Test()
+	" Only works whit vim not neovim!!!
+	let poplist = [' 1 Vim Launch and App Startup', ' 2 General Use (Editing)', ' 3 Auto Commands', ' 4 Scripting', ' 5   Syntax and Basics', ' 6   Variables', ' 7   Windows']
+
+	"call popup_create(poplist, #{ moved: 'any' })
+	call popup_dialog(poplist, #{ moved: 'any' })
+endfunc
+command! MyTest call Test()
+

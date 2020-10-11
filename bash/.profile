@@ -74,22 +74,26 @@ fi
 
 #   Change Prompt
 #   ------------------------------------------------------------
+# https://www.gnu.org/software/bash/manual/html_node/Controlling-the-Prompt.html
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# Half of 16 color codes 
+#   The Other half is a brither version and starts at 90m
+COLOR_BLACK="\033[0;30m"
 COLOR_RED="\033[0;31m"
-COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
-COLOR_OCHRE="\033[38;5;95m"
+COLOR_YELLOW="\033[0;33m"
 COLOR_BLUE="\033[0;34m"
+COLOR_PINK="\033[0;35m"
 COLOR_SOFT_BLUE="\033[0;36m"
 COLOR_WHITE="\033[0;37m"
-COLOR_PINK="\033[1;33m"
 COLOR_RESET="\033[0m"
 
 #Define colors depending on the machine
 case $HOSTNAME in
-MBPaR* | iMac*)
+ndre* )
   HOST_COLOR=$COLOR_SOFT_BLUE
   ;;
-search6 | lip*)
+search* | lip* | lx*)
   HOST_COLOR=$COLOR_RED
   ;;
 *)
@@ -99,20 +103,20 @@ esac
 
 function git_color {
   local git_status="$(git status 2> /dev/null)"
-# if [[ ! $(git status 2> /dev/null | grep 'working \w\+ clean')  ]]; then
-  if [[ ! $(git status 2> /dev/null | grep 'working \(directory\|tree\) clean')  ]]; then
+  if [[ ! $git_status =~ "working "(directory|tree)" clean" ]]; then
     echo -e $COLOR_RED
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo -e $COLOR_YELLOW
   elif [[ $git_status =~ "nothing to commit" ]]; then
     echo -e $COLOR_GREEN
   else
-    echo -e $COLOR_OCHRE
+    echo -e $COLOR_BLUE
   fi
 }
 
 function git_branch {
   local git_status="$(git status 2> /dev/null)"
+  # 2 Regex
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
 
@@ -128,46 +132,43 @@ function git_branch {
 function git_prmp() {
     local gp=""
     if ( git status &> /dev/null ) ; then
-        gp+="($(git_color 2> /dev/null)"                                                        # colors git status
-        gp+="$(git_branch 2> /dev/null)$(git_pull_check 2> /dev/null)$COLOR_RESET)"             # prints current branch
+        gp+="($(git_color 2> /dev/null)"                          # colors git status
+        gp+="$(git_branch 2> /dev/null)$COLOR_RESET)"             # prints current branch
     fi
     echo -e $gp
 }
 
 # Prompt 1
-prmp1_1="________________________________________________________________________________\n"
-prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
-prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
-prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
-prmp1_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
-prmp1_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                                               # prompt
+prmp1_1="_________________________________________________________\n"
+prmp1_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
+prmp1_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
+prmp1_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
+prmp1_1+="\$(git_prmp)"                                           # prints colored git info
+prmp1_1+="\n| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "                 # prompt
 prmp1_2="| \[$COLOR_YELLOW\]=>$COLOR_RESET\] "
 
 # Prompt 2
-prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                    # current folder
-prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                                                   # pc local name
-prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                                                  # user name
-prmp2_1+="\[\$(git_color 2> /dev/null)\]"                                                       # colors git status
-prmp2_1+="\$(git_branch 2> /dev/null) \$(git_pull_check 2> /dev/null)$COLOR_RESET\]"            # prints current branch
-prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
+prmp2_1="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                      # current folder
+prmp2_1+="@ \[$HOST_COLOR\]\h$COLOR_RESET\] "                     # pc local name
+prmp2_1+="\[$COLOR_GREEN\](\u)$COLOR_RESET\] "                    # user name
+prmp2_1+="\$(git_prmp)"                                           # prints colored git info
+prmp2_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp2_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
 # Prompt 3
-prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                                                      # user name
-prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                                                    # pc local name
-prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                                                   # current folder
-prmp3_1+="(\[\$(git_color 2> /dev/null)\]"                                                      # colors git status
-prmp3_1+="\$(git_branch 2> /dev/null)\$(git_pull_check 2> /dev/null)$COLOR_RESET\])"            # prints current branch
-prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                                                 # prompt
+prmp3_1="\[$COLOR_GREEN\]\u$COLOR_RESET\]"                        # user name
+prmp3_1+="@\[$HOST_COLOR\]\h$COLOR_RESET\] "                      # pc local name
+prmp3_1+="\[$COLOR_YELLOW\]\w$COLOR_RESET\] "                     # current folder
+prmp3_1+="\$(git_prmp)"
+prmp3_1+="\n\[$COLOR_YELLOW\]\$$COLOR_RESET\] "                   # prompt
 prmp3_2="\[$COLOR_YELLOW\]\$$COLOR_RESET\] "
 
 # Prompt 4
-prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                                                   # user name
-prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                                                 # pc local name
-prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                                                 # current folder
-prmp4_1+="\$(git_prmp)"                                                                         # prints current branch
-prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                                               # prompt
+prmp4_1="\[$COLOR_GREEN\]\u\[$COLOR_RESET\] "                     # user name
+prmp4_1+="(\[$HOST_COLOR\]\h\[$COLOR_RESET\]) "                   # pc local name
+prmp4_1+="\[$COLOR_YELLOW\]\w\[$COLOR_RESET\] "                   # current folder
+prmp4_1+="\$(git_prmp)"                                           # prints colored git info
+prmp4_1+="\n\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "                 # prompt
 prmp4_2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
 # 256 Color Prompt Genareted by USER and HOSTNAME vars 
@@ -181,8 +182,8 @@ prmp256_uh1+="\$(git_prmp)"
 prmp256_uh1+="\n\[\e[0;33m\]$\[\e[0m\] "
 prmp256_uh2="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 
-# Select a prontp
-if [[ "$TERM" =~ 256color ]]; then
+# Select a prompt
+if [[ "$TERM" =~ 256color && $USER_COLOR_256 =~ ^([0-9]+)$ ]]; then
     PS1=$prmp256_uh1
     PS2=$prmp256_uh2
 else 
@@ -200,6 +201,7 @@ export PATH="$PATH:$HOME/.local/scripts"
 #   Set Default Editor
 #   ------------------------------------------------------------
 type nvim >/dev/null 2>&1 && export EDITOR=nvim
+
 #   Set default blocksize for ls, df, du
 #   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
 #   ------------------------------------------------------------
@@ -209,9 +211,13 @@ export BLOCKSIZE=1k
 #   (this is all commented out as I use Mac Terminal Profiles)
 #   from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 #   ------------------------------------------------------------
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
+if [[ $SHELL_PLATFORM =~ macOS ]]; then  
+	export CLICOLOR=1
+	export LSCOLORS=gxfxcxdxbxegedabagaced
+elif [[ $SHELL_PLATFORM =~ linux ]]; then
+	LS_COLORS=$(echo $LS_COLORS | sed -re 's/di=[0-9;]+:/di=0;94:/' -e 's/ln=[0-9;]+:/ln=0;95:/' )
+	export LS_COLORS
+fi
 
 export HISTSIZE=10000
 export HISEFILESIZE=10000
@@ -243,7 +249,7 @@ iTermColor() {
 }
 
 if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp
-     TTY_temp=$(tty)
+     local TTY_temp=$(tty)
      # TTY=${TTY_temp#*/*/}
      TTY=${TTY_temp#*/*/ttys}
      iTermColor "ttys${TTY}"

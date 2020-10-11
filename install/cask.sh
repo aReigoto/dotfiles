@@ -39,7 +39,8 @@ list_install_cask=( "xquartz"
             "bonjour-browser"
             "docker"
             "whatsapp"
-            "cyberduck" )
+            "cyberduck" 
+			"balenaetcher" "karabiner-elements" "snappy")
 
 
 IFS_ORIGINAL=$IFS
