@@ -24,7 +24,16 @@ Where:
         -i | --info         Info about the virtualenv
         -s | --search       Search a package in virtualenvs
         -a | --atom         Open atom from virtualenv
-        -h | --help         Help?"
+        -h | --help         Help?
+
+Note:
+	brew python bin
+		/usr/local/Cellar/python@3.9/3.9.0/bin/
+		/usr/local/opt/python@3.9/bin	
+
+	brew python site-package
+		/usr/local/lib/python3.9/site-packages
+"
 
 declare -A dic_folders
 
