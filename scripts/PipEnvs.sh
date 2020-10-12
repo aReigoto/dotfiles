@@ -175,19 +175,15 @@ elif [[ $inf == 1 && $env_n > 0 ]] ; then
     echo "$(log_in_by_key $env_n)/lib/python*/site-packages"
 elif [[ sch != 0 ]] ; then	
 	for key in "${!dic_folders[@]}"; do
+
+		pip_cmd=${dic_folders[$key]}/bin/pip
+		msg="$($pip_cmd freeze 2> /dev/null | grep -i $sch )"
 		
-		project_folder=$(cat ${dic_folders[$key]}/.project)
-		lib_folder=${dic_folders[$key]}/lib/python*/site-packages
-
-		echo
-		echo $(basename ${dic_folders[$key]})
-
-		if [[ -f $project_folder/Pipfile ]] ; then
-			grep $sch $project_folder/Pipfile
-			grep $sch $project_folder/Pipfile.lock
+		if [[ $msg ]] ; then
+			echo
+			echo $(basename ${dic_folders[$key]})
+			echo $msg
 		fi
-		find $lib_folder -iname $sch
-		find $lib_folder -iname ".*${sch}.*"
 	done
 fi
 
