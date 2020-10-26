@@ -47,7 +47,7 @@ done
 
 print_dic(){
 echo ""
-for key in "${!dic_folders[@]}"; do
+for key in $( echo "${!dic_folders[@]}" | tr " " "\n" | sort -n | tr "\n" " " ) ; do
   printf "%-2s ->> %s\n" "$key" "$(basename ${dic_folders[$key]})"
 done
 }
