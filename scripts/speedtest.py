@@ -837,7 +837,7 @@ class Speedtest(object):
                 try:
                     try:
                         root = ET.fromstring(''.encode().join(serversxml))
-                        elements = root.getiterator('server')
+                        elements = root.iter('server')
                     except AttributeError:
                         root = DOM.parseString(''.join(serversxml))
                         elements = root.getElementsByTagName('server')
@@ -1039,7 +1039,7 @@ class Speedtest(object):
         def consumer(q, request_count):
             while len(finished) < request_count:
                 thread = q.get(True)
-                while thread.isAlive():
+                while thread.is_alive():
                     thread.join(timeout=0.1)
                 finished.append(sum(thread.result))
                 callback(thread.i, request_count, end=True)
@@ -1052,9 +1052,9 @@ class Speedtest(object):
         start = timeit.default_timer()
         prod_thread.start()
         cons_thread.start()
-        while prod_thread.isAlive():
+        while prod_thread.is_alive():
             prod_thread.join(timeout=0.1)
-        while cons_thread.isAlive():
+        while cons_thread.is_alive():
             cons_thread.join(timeout=0.1)
 
         stop = timeit.default_timer()
@@ -1106,7 +1106,7 @@ class Speedtest(object):
         def consumer(q, request_count):
             while len(finished) < request_count:
                 thread = q.get(True)
-                while thread.isAlive():
+                while thread.is_alive():
                     thread.join(timeout=0.1)
                 finished.append(thread.result)
                 callback(thread.i, request_count, end=True)
@@ -1119,9 +1119,9 @@ class Speedtest(object):
         start = timeit.default_timer()
         prod_thread.start()
         cons_thread.start()
-        while prod_thread.isAlive():
+        while prod_thread.is_alive():
             prod_thread.join(timeout=0.1)
-        while cons_thread.isAlive():
+        while cons_thread.is_alive():
             cons_thread.join(timeout=0.1)
 
         stop = timeit.default_timer()
