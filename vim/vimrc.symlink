@@ -59,7 +59,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set splitbelow splitright
 
 " Automatically removing all trailing whitespace
-autocmd BufWritePre * %s/\s\+$//e
+"autocmd BufWritePre * %s/\s\+$//e
 " ========================================
 " ============My Mappings=================
 " ========================================
@@ -70,6 +70,8 @@ nmap <leader><leader> :w<cr>    " shortcut to save
 " =======My Commands & Functions===========
 " ========================================
 command! HelpMe :vs ~/.vimhelp | set filetype=help
+
+command MyDelTrailingWhitespace %s/\s\+$//e
 
 function! NumberToggle()
 	if(&relativenumber == 1)
