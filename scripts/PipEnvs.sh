@@ -140,6 +140,11 @@ choice_handler(){
 
 echo "$usage"
 
+if [[ ${#dic_folders[@]} == 0 ]] ; then
+	echo -e "\n No virtual environments available"
+	exit 0
+fi
+
 echo -e "\nVirtual environments available:"
 print_dic
 

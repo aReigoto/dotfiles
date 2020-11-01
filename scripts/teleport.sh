@@ -1,5 +1,4 @@
-#!/usr/local/bin/env /usr/local/bin/bash
-# #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 location_of_dic=~/.dotfiles/localFiles/teleport_folders.sh
 location_folder_dic=~/.dotfiles/localFiles

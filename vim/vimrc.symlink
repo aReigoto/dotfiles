@@ -23,7 +23,7 @@ Plug 'scrooloose/nerdtree'
 " Icons
 "Plug 'ryanoasis/vim-devicons'
 "Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim' 
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "Plug 'christoomey/vim-tmux-navigator'
@@ -33,7 +33,7 @@ Plug 'morhetz/gruvbox'
 " TS Syntax
 "Plug 'HerringtonDarkholme/yats.vim'
 " AirLine
-Plug 'vim-airline/vim-airline' 
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
@@ -55,9 +55,11 @@ set mouse+=a						" allow to resize windows with mouse
 " = disable auto comment =
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Set split order 
+" Set split order
 set splitbelow splitright
 
+" Automatically removing all trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
 " ========================================
 " ============My Mappings=================
 " ========================================
@@ -144,7 +146,7 @@ MyFoldindToggle
 nmap <leader>w :NERDTreeToggle<CR>
 
 " ------ ctrlp ------
-let g:ctrlp_map = '<leader>p' 
+let g:ctrlp_map = '<leader>p'
 
 " ------ NERDTree -----
 let NERDTreeShowHidden=1
