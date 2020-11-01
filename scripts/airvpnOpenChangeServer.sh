@@ -11,7 +11,7 @@ fi
 
 if [ -f $1 ] ; then
 
-	if ! [[ $1 =~ .*ovpn ]] ; then echo "A .ovpn file is requierd as a argument!" ; exit 0 fi
+	if ! [[ $1 =~ .*ovpn ]] ; then echo "A .ovpn file is requierd as a argument!" ; exit 0 ; fi
 
 	perl -pe 's/((ca|user|ta)\.\w+)/\/etc\/openvpn\/$1/' "$1" > "${currenServer}/client.conf"
 
