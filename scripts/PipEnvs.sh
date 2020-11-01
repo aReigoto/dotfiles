@@ -29,7 +29,7 @@ Where:
 Note:
 	brew python bin
 		/usr/local/Cellar/python@3.9/3.9.0/bin/
-		/usr/local/opt/python@3.9/bin	
+		/usr/local/opt/python@3.9/bin
 
 	brew python site-package
 		/usr/local/lib/python3.9/site-packages
@@ -42,7 +42,9 @@ venvs_folder=~/.local/share/virtualenvs/*
 for folder in $venvs_folder ; do
   let i++
   # echo $env
-  dic_folders+=(["$i"]="$folder")
+  if [[ -d $folder ]]; then
+      dic_folders+=(["$i"]="$folder")
+  fi
 done
 
 print_dic(){
@@ -148,7 +150,7 @@ fi
 echo -e "\nVirtual environments available:"
 print_dic
 
-if [[ $# == 2 ]]; then 
+if [[ $# == 2 ]]; then
 	echo -e "Pick a number\n> $@"
 	choice_handler $@
 else
@@ -164,13 +166,13 @@ elif [[ $cmd == 1 && $env_n > 0 ]] ; then
 elif [[ $opn == 1 && $env_n > 0 ]] ; then
     bash --rcfile <(echo ". ~/.bashrc; source $(log_in_by_key $env_n)/bin/activate")
 elif [[ $inf == 1 && $env_n > 0 ]] ; then
-    echo 
+    echo
     echo "Version:"
     echo $($(log_in_by_key $env_n)/bin/python --version)
     echo
     echo "Original project folder:"
     echo $(cat $(log_in_by_key $env_n)/.project)
-    echo 
+    echo
     echo "To activate manualy:"
     echo "source $(log_in_by_key $env_n)/bin/activate"
     echo "To exit the venv type: deactivate"
@@ -178,12 +180,12 @@ elif [[ $inf == 1 && $env_n > 0 ]] ; then
     echo "Executable and site-packages:"
     echo $(log_in_by_key $env_n)/bin/python
     echo "$(log_in_by_key $env_n)/lib/python*/site-packages"
-elif [[ sch != 0 ]] ; then	
+elif [[ sch != 0 ]] ; then
 	for key in "${!dic_folders[@]}"; do
 
 		pip_cmd=${dic_folders[$key]}/bin/pip
 		msg="$($pip_cmd freeze 2> /dev/null | grep -i $sch )"
-		
+
 		if [[ $msg ]] ; then
 			echo
 			echo $(basename ${dic_folders[$key]})
