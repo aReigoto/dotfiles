@@ -289,7 +289,7 @@ if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp
      TTY=${TTY_temp#*/*/*/}
      iTermColor "${TTY}"
      iTermTabColor blue
-     echo "Current login: $(date) on $TTY"
+     echo "Current login: $(date) on tty$TTY"
      IFS_ORIGINAL=$IFS
      unset TTY_temp
 fi
