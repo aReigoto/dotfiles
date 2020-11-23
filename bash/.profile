@@ -283,15 +283,15 @@ iTermTabColor() {
     esac
  }
 
-
+# Colorize iTerm when in a ssh session 
 if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp
-     local TTY_temp=$(tty)
-     # TTY=${TTY_temp#*/*/}
-     TTY=${TTY_temp#*/*/ttys}
-     iTermColor "ttys${TTY}"
+     TTY_temp=$(tty)
+     TTY=${TTY_temp#*/*/*/}
+     iTermColor "${TTY}"
      iTermTabColor blue
      echo "Current login: $(date) on $TTY"
      IFS_ORIGINAL=$IFS
+     unset TTY_temp
 fi
 
 #   ---------------------------------------
