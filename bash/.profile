@@ -212,11 +212,11 @@ export BLOCKSIZE=1k
 #   from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 #   ------------------------------------------------------------
 if [[ $SHELL_PLATFORM =~ macOS ]]; then  
-	export CLICOLOR=1
-	export LSCOLORS=gxfxcxdxbxegedabagaced
+  export CLICOLOR=1
+  export LSCOLORS=gxfxcxdxbxegedabagaced
 elif [[ $SHELL_PLATFORM =~ linux ]]; then
-	LS_COLORS=$(echo $LS_COLORS | sed -re 's/di=[0-9;]+:/di=0;94:/' -e 's/ln=[0-9;]+:/ln=0;95:/' )
-	export LS_COLORS
+  LS_COLORS=$(echo $LS_COLORS | sed -re 's/di=[0-9;]+:/di=0;94:/' -e 's/ln=[0-9;]+:/ln=0;95:/' )
+  export LS_COLORS
 fi
 
 export HISTSIZE=10000
@@ -224,7 +224,15 @@ export HISEFILESIZE=10000
 
 # ================== iTerm Profile ==============
 iTermColor() {
+
     iTerm_profile=""
+
+    if [[ $1 =~ -(h|-help) ]] ; then 
+      echo "Run with agrs [0-9] to change iTermProfile"
+      echo "Running with out any args will set iTermProfile to a random [0-9]"
+      echo "Run iTermColor 0 to set to Default iTermProfile"
+    fi
+
     if [[ $1 =~ ^ttys0[0-1][0-9]$ ]]; then
         iTerm_profile=$1
     # Check if arg is int
@@ -236,7 +244,7 @@ iTermColor() {
         iTerm_profile="ttys0$1"
     else
         # Set profile randomly from 0 to 9
-        iTerm_profile=$(( $$ % 10 ))
+        iTerm_profile=$(( $(date +%s) % 10 ))
         iTerm_profile="ttys00${iTerm_profile}"
     fi
 
@@ -244,15 +252,44 @@ iTermColor() {
         iTerm_profile="Default"
     fi
 
-    echo -e "\033]50;SetProfile=$iTerm_profile\a"
-    echo -e "\033];$iTerm_profile\007"
+    echo -ne "\033]50;SetProfile=$iTerm_profile\a"
+    echo -ne "\033];$iTerm_profile\007"
 }
+
+iTermTabColorRGB() {
+    echo -ne "\033]6;1;bg;red;brightness;$1\a"
+    echo -ne "\033]6;1;bg;green;brightness;$2\a"
+    echo -ne "\033]6;1;bg;blue;brightness;$3\a"
+}
+
+iTermTabColor() {
+    # Using rgb values
+    # green : r 57, g 197, b 77
+    case $1 in
+    green)
+    iTermTabColorRGB 57 197 77
+    ;;
+    red)
+    iTermTabColorRGB 270 60 83
+    ;;
+    orange)
+    iTermTabColorRGB 227 143 10
+    ;;
+    blue)
+    iTermTabColorRGB 45 157 232
+    ;;
+    *)
+    echo -ne "\033]6;1;bg;*;default\a"
+    esac
+ }
+
 
 if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp
      local TTY_temp=$(tty)
      # TTY=${TTY_temp#*/*/}
      TTY=${TTY_temp#*/*/ttys}
      iTermColor "ttys${TTY}"
+     iTermTabColor blue
      echo "Current login: $(date) on $TTY"
      IFS_ORIGINAL=$IFS
 fi
