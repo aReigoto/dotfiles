@@ -281,7 +281,11 @@ iTermTabColor() {
     *)
     echo -ne "\033]6;1;bg;*;default\a"
     esac
- }
+}
+
+iTermTabTitle() {
+  echo -ne "\033]0;"$*"\007"
+}
 
 # Colorize iTerm when in a ssh session 
 if [ "$SSH_TTY" ]; then # This ensures that will not interfere with sftp and scp

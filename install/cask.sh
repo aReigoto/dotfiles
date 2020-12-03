@@ -23,10 +23,9 @@ list_install_cask=( "xquartz"
             "skype"
             "cheatsheet"
             "tor-browser"
-            "subtitle-master"
             "virtualbox"
             "virtualbox-extension-pack"
-            "soundflower"
+            #"soundflower"
             "deluge"
             "soulseek"
             "musicbrainz-picard"
@@ -40,8 +39,16 @@ list_install_cask=( "xquartz"
             "docker"
             "whatsapp"
             "cyberduck" 
-			"balenaetcher" "karabiner-elements" "snappy")
+			"balenaetcher" 
+			"karabiner-elements" 
+			"snappy"
+			"sketchbook"
+			"musescore")
 
+
+# Cog is from
+# https://github.com/kode54/Cog
+# https://kode54.net/cog
 
 IFS_ORIGINAL=$IFS
 IFS=$'\n'
