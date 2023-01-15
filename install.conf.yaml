@@ -11,6 +11,7 @@
 - create:
     - ~/.config
     - ~/.local/scripts
+    - ~/.jupyter
 
 - link:
     # Link files
