@@ -1,0 +1,71 @@
+{
+    "editor.fontSize": 16,
+    "editor.fontWeight": "500",
+    "editor.fontFamily": "Source Code Pro",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.lineNumbers": "on",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "editor.dragAndDrop": false,
+    "editor.emptySelectionClipboard": false,
+    "editor.suggestSelection": "recentlyUsed",
+    // Debug
+    "debug.console.fontFamily": "Source Code Pro",
+    "debug.console.fontSize": 16,
+    // Terminal
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontWeight": "600",
+    "workbench.editor.showTabs": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.settings.editor": "json",
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.settings.useSplitJSON": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    // breadcrumbs  
+    "breadcrumbs.enabled": true,
+    // theme by language
+    "theme-by-language.themes": {
+        // "python": "Gruvbox Dark Medium",
+        // "jupyter":"Dark+"
+    },
+    // Python 
+    "python.venvPath": "~/.local/share/virtualenvs/",
+    "python.pythonPath": "/Users/andre/.pyenv/versions/3.8.1/bin/python",
+    "jupyter.runStartupCommands": [
+        "import os",
+        "os.environ['PYTHONPATH'] += os.pathsep + r'~/Dropbox/00-NotSharing/02-Informatica/python/myPyLib'",
+        "os.environ['PYTHONPATH'] += os.pathsep + r'~/Dropbox/00-NotSharing/02-Informatica/python/crypto/cryptobotProject/cryptoBotProject-GitLab'",
+    ],
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "jupyter.askForKernelRestart": false,
+    "jupyter.sendSelectionToInteractiveWindow": true,
+    "jupyter.interactiveWindowMode": "perFile",
+    // "jupyter.interactiveWindowMode": "single",
+    "python.defaultInterpreterPath": "/Users/andre/.pyenv/versions/3.8.1/bin/python",
+    "notebook.output.textLineLimit": 500,
+    // "jupyter.textOutputLimit": 0,
+    // Testing
+    // Offer auto-import completions.
+	// "python.analysis.autoImportCompletions": false,
+    // git
+    "git.autofetch": true,
+    // C_Cpp
+    "C_Cpp.updateChannel": "Insiders",
+    "python.languageServer": "Jedi",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    // neovim
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "hexeditor.columnWidth": 32,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+    "vim.easymotion": true,
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/andre/.nvimrc",
+}

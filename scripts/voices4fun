@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for (( i=0 ; i <= $(say -v "?" | wc -l) ; i++ )) ; do 
+say -v "?" | sed -n "$i{p;}"
+say -v "?" | sed -n "$i{p;}" | awk '{print $1" "; print "\""  substr($0,index($0,$4)) "\"" }' | xargs -n2 say -v
+done

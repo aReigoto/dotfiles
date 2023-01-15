@@ -1,0 +1,5 @@
+# Save a list of installed packages 
+brew bundle dump
+
+# Install packages from list
+brew bundle

@@ -1,0 +1,10 @@
+name: nvimPy
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pynvim
+  - jupyterlab
+  - pip
+  - pip:
+    - kaleido

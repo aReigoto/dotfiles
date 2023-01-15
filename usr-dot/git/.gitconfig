@@ -1,0 +1,21 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	safecrlf = true
+[alias]
+	ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+	lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+	ca = commit -a -m
+	s = status -uall
+	p = pull
+	f = fetch --quiet
+	ls = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+	la = !git config -l | grep alias | cut -c 7-
+	lb = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\"
+	lla = log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --compact-summary
+[include]
+    path = .git_user_info
+[user]
+	email = 18371208+aReigoto@users.noreply.github.com 
+	name = aReigoto
