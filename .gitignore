@@ -1,6 +1,6 @@
 .DS_Store
 *.swp
 localFiles/*
-nvim/plugin
-nvim/lua/local-conf/*
-nvim/lua/.luarc.json
+**/nvim/plugin
+**/nvim/lua/local-conf/*
+**/nvim/lua/.luarc.json
