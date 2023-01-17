@@ -1,0 +1,2 @@
+#To create a env from a yml file use following exemple:
+conda env create -f environment.yml
