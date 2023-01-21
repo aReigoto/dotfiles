@@ -46,3 +46,6 @@
     ~/.local/scripts:
         glob: true
         path: scripts/*
+
+- shell:
+        - [git submodule update --init --recursive, Installing submodules]
