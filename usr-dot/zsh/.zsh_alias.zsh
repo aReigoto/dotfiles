@@ -2,7 +2,7 @@ function mcd {
     mkdir -p $1 && cd $1
 }
 
-alias tlp="python teleport.py ; cd ${TLP_DIR}"
+alias tlp='teleport.py && cd "$(cat ~/.local/state/teleport/portal)"'
 
 alias cnda="conda activate"
 alias cndd="conda deactivate"
