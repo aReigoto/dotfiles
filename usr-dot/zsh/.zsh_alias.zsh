@@ -3,7 +3,7 @@ function mcd {
 }
 
 alias tlp='teleport.py && cd "$(cat ~/.local/state/teleport/portal)"'
-
+alias LogicProX='/Applications/Logic\ Pro\ X.app/Contents/MacOS/Logic\ Pro\ X'
 alias cnda="conda activate"
 alias cndd="conda deactivate"
 alias cndls="conda env list"
