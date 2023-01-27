@@ -41672,7 +41672,7 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
-	<true/>
+	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
