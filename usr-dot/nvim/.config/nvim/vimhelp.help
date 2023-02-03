@@ -651,7 +651,7 @@ TODO:
     `<leader>dt`               => terminate
 
   |Toggleterm|
-    `<C-\>`                    => toggle terminal window
+    `<leader>t`                    => toggle terminal window
 
   |tabular|
     Basic/Auto
@@ -665,7 +665,7 @@ TODO:
       `:Tabularize` /\v[.=]/r0c0l1c1l0
 
   |lazygit|
-    `<leader>gg`      => Spawn a toggleterm window with lazygit
+    `<leader>tg`      => Spawn a toggleterm window with lazygit
 
   |vim-zoom|
     `<C-w>m`          => zoom the current window (is is mapped to <leader>z)

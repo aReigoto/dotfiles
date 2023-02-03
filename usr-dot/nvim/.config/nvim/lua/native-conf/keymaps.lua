@@ -75,7 +75,7 @@ keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
 -- Git
 -- This function is declared in toggleterm
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+keymap("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
