@@ -50,7 +50,7 @@ Short cut: press * to go and # to come back
   |easymotion|
   |nvim-tree|
   |Telescope|
-  |multiple_cursor|
+  |vim-visual-multi|
   |vim-illuminate|
   |cmp|
   |nvim-surrond|
@@ -627,16 +627,16 @@ TODO:
     See `:help` `vim.lsp.*` for documentation on any of the below functions
       `<space>dc`              => declaration
       `<space>de`              => definition
-      `<space>im`              => implementation
+      `<space>di`              => implementation
       `<space>h`               => hover; show docstring in python
-      `<space>sg`              => signature_help
-      `<space>wa`              => add_workspace_folder
-      `<space>wr`              => remove_workspace_folder
-      `<space>wl`              => list_workspace_folders
-      `<space>D`               => type_definition
-      `<space>rn`              => rename all occurrences of token across project
-      `<space>ca`              => code_action, auto organize imports and more...
-      `<space>rf`              => references list all references across the project in split window
+      `<space>ls`              => signature_help
+      `<space>la`              => add_workspace_folder
+      `<space>lr`              => remove_workspace_folder
+      `<space>ll`              => list_workspace_folders
+      `<space>ld`               => type_definition
+      `<space>lr`              => rename all occurrences of token across project
+      `<space>lo`              => code_action, auto organize imports and more...
+      `<space>lr`              => references list all references across the project in split window
       `<space>f`               => formatting
 
   |DAP| Debug application protocol
@@ -648,7 +648,7 @@ TODO:
     `<leader>dr`               => repl.toggle
     `<leader>dl`               => run_last
     `<leader>du`               => toggle
-    '<leader>dt'               => terminate
+    `<leader>dt`               => terminate
 
   |Toggleterm|
     `<C-\>`                    => toggle terminal window
