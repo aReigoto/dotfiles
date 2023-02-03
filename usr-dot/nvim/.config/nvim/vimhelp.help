@@ -628,12 +628,12 @@ TODO:
       `<space>lg`              => declaration
       `<space>le`              => definition
       `<space>li`              => implementation
-      `<space>lh`               => hover; show docstring in python
+      `<space>ld`              => type_definition
+      `<space>lh`              => hover; show docstring in python
       `<space>ls`              => signature_help
-      `<space>laf`              => add_workspace_folder
-      `<space>lrf`              => remove_workspace_folder
-      `<space>llf`              => list_workspace_folders
-      `<space>ld`               => type_definition
+      `<space>laf`             => add_workspace_folder
+      `<space>lrf`             => remove_workspace_folder
+      `<space>llf`             => list_workspace_folders
       `<space>lc`              => rename all occurrences of token across project
       `<space>lo`              => code_action, auto organize imports and more...
       `<space>lr`              => references list all references across the project in split window
