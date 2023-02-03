@@ -20,6 +20,7 @@ M.setup = function(bufnr)
     vim.keymap.set('n', '<leader>lg', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<leader>le', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<leader>ld', vim.lsp.buf.type_definition, bufopts)
     -- Show docstring in python
     vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, bufopts)
@@ -28,7 +29,6 @@ M.setup = function(bufnr)
     vim.keymap.set('n', '<leader>llf', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    vim.keymap.set('n', '<leader>ld', vim.lsp.buf.type_definition, bufopts)
     -- Rename all symbols across the project!
     vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, bufopts)
     -- Auto organize imports and more...
