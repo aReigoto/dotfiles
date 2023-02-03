@@ -5,32 +5,32 @@ M.setup = function(bufnr)
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     -- Navegate/inspect errors and warnings
     local opts = { noremap=true, silent=true }
-    vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<leader>lf', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '<leader>lp', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', '<leader>ln', vim.diagnostic.goto_next, opts)
     -- Send info to a quickfixlist window
-    vim.keymap.set('n', '<leader>dw', vim.diagnostic.setloclist, opts)
+    vim.keymap.set('n', '<leader>lw', vim.diagnostic.setloclist, opts)
     -- After opening :Telescope diagnostics press <C-w> to send the info to quickfixlist window
-    vim.keymap.set('n', '<leader>dt', "<cmd>Telescope diagnostics<cr>", opts)
+    vim.keymap.set('n', '<leader>lt', "<cmd>Telescope diagnostics<cr>", opts)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     -- All the tree are the same in python but differ for other languages like cpp
-    vim.keymap.set('n', '<leader>dc', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<leader>de', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', '<leader>di', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<leader>lg', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', '<leader>le', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, bufopts)
     -- Show docstring in python
-    vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<leader>la', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>ll', function()
+    vim.keymap.set('n', '<leader>laf', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>lrf', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>llf', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
     vim.keymap.set('n', '<leader>ld', vim.lsp.buf.type_definition, bufopts)
     -- Rename all symbols across the project!
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, bufopts)
     -- Auto organize imports and more...
     vim.keymap.set('n', '<leader>lo', vim.lsp.buf.code_action, bufopts)
     -- List all references across the project in split window

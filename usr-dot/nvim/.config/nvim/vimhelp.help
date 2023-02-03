@@ -617,24 +617,24 @@ TODO:
 
   |LSP|
     Diagnostics (errors/warnings) of LSP
-      `<space>df`            => open_float window whit erros/warnings
-      `<sapce>dp`            => goto_prev whit erro/warning
-      `<sapce>dn`            => goto_next whit erro/warning
-      `<space>dw`            => send info to a quickfixlist window
-      `<space>dt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
+      `<space>lf`            => open_float window whit erros/warnings
+      `<sapce>lp`            => goto_prev whit erro/warning
+      `<sapce>ln`            => goto_next whit erro/warning
+      `<space>lw`            => send info to a quickfixlist window
+      `<space>lt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
 
     Mappings LSP
     See `:help` `vim.lsp.*` for documentation on any of the below functions
-      `<space>dc`              => declaration
-      `<space>de`              => definition
-      `<space>di`              => implementation
-      `<space>h`               => hover; show docstring in python
+      `<space>lg`              => declaration
+      `<space>le`              => definition
+      `<space>li`              => implementation
+      `<space>lh`               => hover; show docstring in python
       `<space>ls`              => signature_help
-      `<space>la`              => add_workspace_folder
-      `<space>lr`              => remove_workspace_folder
-      `<space>ll`              => list_workspace_folders
+      `<space>laf`              => add_workspace_folder
+      `<space>lrf`              => remove_workspace_folder
+      `<space>llf`              => list_workspace_folders
       `<space>ld`               => type_definition
-      `<space>lr`              => rename all occurrences of token across project
+      `<space>lc`              => rename all occurrences of token across project
       `<space>lo`              => code_action, auto organize imports and more...
       `<space>lr`              => references list all references across the project in split window
       `<space>f`               => formatting
