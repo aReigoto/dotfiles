@@ -87,8 +87,12 @@ return packer.startup(function(use)
   -- use {"justinmk/vim-sneak"}
 
   -- Tmux and vim window navegation
-  use ("christoomey/vim-tmux-navigator")
-
+  use { "christoomey/vim-tmux-navigator",
+    config = function ()
+      require "plugins-conf.vim-tmux-nav"
+    end,
+    disable = false,
+  }
   -- Multi cursor
   use { "mg979/vim-visual-multi",
     config = function()
