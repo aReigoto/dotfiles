@@ -58,6 +58,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
+    ['<Down>'] = cmp.config.disable,
+    ['<Up>'] = cmp.config.disable,
 		['<C-S-n>'] = cmp.mapping.scroll_docs(-4),
 		['<C-S-p>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
