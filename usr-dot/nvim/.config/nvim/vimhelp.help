@@ -50,7 +50,7 @@ Short cut: press * to go and # to come back
   |easymotion|
   |nvim-tree|
   |Telescope|
-  |multiple_cursor|
+  |vim-visual-multi|
   |vim-illuminate|
   |cmp|
   |nvim-surrond|
@@ -617,26 +617,26 @@ TODO:
 
   |LSP|
     Diagnostics (errors/warnings) of LSP
-      `<space>df`            => open_float window whit erros/warnings
-      `<sapce>dp`            => goto_prev whit erro/warning
-      `<sapce>dn`            => goto_next whit erro/warning
-      `<space>dw`            => send info to a quickfixlist window
-      `<space>dt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
+      `<space>lf`            => open_float window whit erros/warnings
+      `<sapce>lp`            => goto_prev whit erro/warning
+      `<sapce>ln`            => goto_next whit erro/warning
+      `<space>lw`            => send info to a quickfixlist window
+      `<space>lt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
 
     Mappings LSP
     See `:help` `vim.lsp.*` for documentation on any of the below functions
-      `<space>dc`              => declaration
-      `<space>de`              => definition
-      `<space>im`              => implementation
-      `<space>h`               => hover; show docstring in python
-      `<space>sg`              => signature_help
-      `<space>wa`              => add_workspace_folder
-      `<space>wr`              => remove_workspace_folder
-      `<space>wl`              => list_workspace_folders
-      `<space>D`               => type_definition
-      `<space>rn`              => rename all occurrences of token across project
-      `<space>ca`              => code_action, auto organize imports and more...
-      `<space>rf`              => references list all references across the project in split window
+      `<space>lg`              => declaration
+      `<space>le`              => definition
+      `<space>li`              => implementation
+      `<space>ld`              => type_definition
+      `<space>lh`              => hover; show docstring in python
+      `<space>ls`              => signature_help
+      `<space>laf`             => add_workspace_folder
+      `<space>lrf`             => remove_workspace_folder
+      `<space>llf`             => list_workspace_folders
+      `<space>lc`              => rename all occurrences of token across project
+      `<space>lo`              => code_action, auto organize imports and more...
+      `<space>lr`              => references list all references across the project in split window
       `<space>f`               => formatting
 
   |DAP| Debug application protocol
@@ -648,10 +648,10 @@ TODO:
     `<leader>dr`               => repl.toggle
     `<leader>dl`               => run_last
     `<leader>du`               => toggle
-    '<leader>dt'               => terminate
+    `<leader>dt`               => terminate
 
   |Toggleterm|
-    `<C-\>`                    => toggle terminal window
+    `<leader>t`                    => toggle terminal window
 
   |tabular|
     Basic/Auto
@@ -665,7 +665,7 @@ TODO:
       `:Tabularize` /\v[.=]/r0c0l1c1l0
 
   |lazygit|
-    `<leader>gg`      => Spawn a toggleterm window with lazygit
+    `<leader>tg`      => Spawn a toggleterm window with lazygit
 
   |vim-zoom|
     `<C-w>m`          => zoom the current window (is is mapped to <leader>z)
