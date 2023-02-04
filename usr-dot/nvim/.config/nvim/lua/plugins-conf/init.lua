@@ -209,6 +209,8 @@ return packer.startup(function(use)
       "hrsh7th/cmp-nvim-lsp-signature-help",
       -- cmp for cmdline
       "hrsh7th/cmp-cmdline",
+      -- Source for getting completions from cmpline
+      "dmitmel/cmp-cmdline-history",
       -- snippet completions
       "saadparwaiz1/cmp_luasnip",
       -- Dictionary completion

@@ -68,10 +68,10 @@ cmp.setup({
     -- This are the sources in display order
 		{ name = "nvim_lua" },
 		{ name = 'nvim_lsp' },
-    	{ name = 'nvim_lsp_signature_help'},
+   	{ name = 'nvim_lsp_signature_help'},
 		{ name = 'luasnip' },
-    	{ name = "treesitter" },
-    	{ name = "dictionary"},
+   	{ name = "treesitter" },
+   	{ name = "dictionary"},
 	}, {
 		{ name = 'buffer' },
 		{ name = "path" },
@@ -99,18 +99,24 @@ cmp.setup({
 })
 
 -- Use buffer source for `/`
--- cmp.setup.cmdline("/", {
---   sources = {
---     { name = "buffer" },
---   },
--- })
+cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "buffer" },
+  },
+})
 
 -- Use cmdline & path source for ':'
--- cmp.setup.cmdline(":", {
---   sources = cmp.config.sources({
---     { name = "path" },
---   }, {
---     { name = "cmdline" },
---   }),
--- })
-
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
