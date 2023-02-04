@@ -114,7 +114,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 test -e "${HOME}/.zsh_alias.zsh" && source "${HOME}/.zsh_alias.zsh"
 test -e "${HOME}/.zsh_local.zsh" && source "${HOME}/.zsh_local.zsh"
-export PATH="$PATH:$HOME/.local/scripts"
+export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
