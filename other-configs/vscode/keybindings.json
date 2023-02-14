@@ -4,4 +4,24 @@
         "key": "ctrl+b",
         "command": "workbench.action.toggleActivityBarVisibility"
     },
+    {
+        "key": "ctrl+shift+down",
+        "command": "cursorColumnSelectDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+cmd+down",
+        "command": "-cursorColumnSelectDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+up",
+        "command": "cursorColumnSelectUp",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+cmd+up",
+        "command": "-cursorColumnSelectUp",
+        "when": "textInputFocus"
+    }
 ]
