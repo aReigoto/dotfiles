@@ -215,7 +215,7 @@ def menu(portals):
 
 # %%
 if __name__ == '__main__':
-    white_portal()
+    # white_portal()
     portals = load(TLP_FILE)
     
     help_meassage()
