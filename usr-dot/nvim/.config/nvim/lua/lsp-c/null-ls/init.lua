@@ -31,6 +31,7 @@ local sources = {
   -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
+  b.diagnostics.flake8,
   b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
