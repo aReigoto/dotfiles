@@ -44,9 +44,9 @@ function M.setup(servers, options)
     --   -- print "jdtls is handled by nvim-jdtls"
     -- end,
 
-    ["sumneko_lua"] = function()
-      local opts = vim.tbl_deep_extend("force", options, servers["sumneko_lua"] or {})
-      lspconfig.sumneko_lua.setup { opts }
+    ["lua_ls"] = function()
+      local opts = vim.tbl_deep_extend("force", options, servers["lua_ls"] or {})
+      lspconfig.lua_ls.setup { opts }
     end,
 
     -- ["rust_analyzer"] = function()
