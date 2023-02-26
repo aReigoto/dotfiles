@@ -617,27 +617,27 @@ TODO:
 
   |LSP|
     Diagnostics (errors/warnings) of LSP
-      `<space>lf`            => open_float window whit erros/warnings
-      `<sapce>lp`            => goto_prev whit erro/warning
-      `<sapce>ln`            => goto_next whit erro/warning
-      `<space>lw`            => send info to a quickfixlist window
-      `<space>lt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
+      `<leader>lf`            => open_float window whit erros/warnings
+      `<leader>lp`            => goto_prev whit erro/warning
+      `<leader>ln`            => goto_next whit erro/warning
+      `<leader>lw`            => send info to a quickfixlist window
+      `<leader>lt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
 
     Mappings LSP
     See `:help` `vim.lsp.*` for documentation on any of the below functions
-      `<space>lg`              => declaration
-      `<space>le`              => definition
-      `<space>li`              => implementation
-      `<space>ld`              => type_definition
-      `<space>lh`              => hover; show docstring in python
-      `<space>ls`              => signature_help
-      `<space>laf`             => add_workspace_folder
-      `<space>lrf`             => remove_workspace_folder
-      `<space>llf`             => list_workspace_folders
-      `<space>lc`              => rename all occurrences of token across project
-      `<space>lo`              => code_action, auto organize imports and more...
-      `<space>lr`              => references list all references across the project in split window
-      `<space>f`               => formatting
+      `<leader>lg`              => declaration
+      `<leader>le`              => definition
+      `<leader>li`              => implementation
+      `<leader>ld`              => type_definition
+      `<leader>lh`              => hover; show docstring in python
+      `<leader>ls`              => signature_help
+      `<leader>laf`             => add_workspace_folder
+      `<leader>lrf`             => remove_workspace_folder
+      `<leader>llf`             => list_workspace_folders
+      `<leader>lc`              => rename all occurrences of token across project
+      `<leader>lo`              => code_action, auto organize imports and more...
+      `<leader>lr`              => references list all references across the project in split window
+      `<leader>f`               => formatting
 
   |DAP| Debug application protocol
     `<leader>db`               => toggle_breakpoint

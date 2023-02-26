@@ -42,7 +42,12 @@ keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 -- Close buffers
 keymap("n", "<C-S-q>", "<cmd>Bdelete!<CR>", opts)
 
--- Better paste
+-- greatest remap ever
+keymap("x", "<leader>p", [["_dP]])
+keymap({"n", "v"}, "<leader>y", [["+y]])
+keymap("n", "<leader>Y", [["+Y]])
+keymap({"n", "v"}, "<leader>d", [["_d]])
+
 -- keymap("v", "p", '"_dP', opts)
 
 -- Not allowing delete to write on clipboard
