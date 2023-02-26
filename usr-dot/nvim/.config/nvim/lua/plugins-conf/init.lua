@@ -234,7 +234,8 @@ return packer.startup(function(use)
 
   use { "neovim/nvim-lspconfig",
     config = function()
-      require("lsp-c").setup()
+      -- require("lsp-c").setup()
+      require("lsp-conf")
     end,
     requires = {
       "williamboman/mason.nvim",
