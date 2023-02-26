@@ -5,6 +5,7 @@ M.setup = function(bufnr)
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     -- Navegate/inspect errors and warnings
     local opts = { noremap=true, silent=true }
+    local keymap = vim.api.nvim_buf_set_keymap
     vim.keymap.set('n', '<leader>lf', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '<leader>lp', vim.diagnostic.goto_prev, opts)
     vim.keymap.set('n', '<leader>ln', vim.diagnostic.goto_next, opts)
@@ -35,9 +36,25 @@ M.setup = function(bufnr)
     vim.keymap.set('n', '<leader>lo', vim.lsp.buf.code_action, bufopts)
     -- List all references across the project in split window
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references, bufopts)
-    -- Next option changed beavior check https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/MAIN.md
-    -- to correct the error (expected string|function, got nil) 
-    -- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    -- Format file usig the lsp
+    keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
+
+  -- TODO: rewite the vim.keymap.set to the following form
+  -- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  -- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  -- keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  -- keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  -- keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts) 
 end
 
 return M
