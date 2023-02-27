@@ -234,6 +234,13 @@ TODO:
     `x`       => Delete a single character
     `<C-a>`   => |increment| number or alphabetic character at or after the cursor
     `<C-x>`   => |decrement| number or alphabetic character at or after the cursor
+    `z<CR>`   => move secrean to the top and cursor to the first non-blank char
+    `zt`      => move secrean to the top keap the cursor ant the same possition 
+    `z.`      => move secrean to the center and cursor to the first non-blank char
+    `zz`      => move secrean to the center keap the cursor ant the same possition 
+    `z-`      => move secrean to the bottom and cursor to the first non-blank char
+    `zb`      => move secrean to the bottom keap the cursor ant the same possition 
+    
   
   Move to |matching-braces|
     `%`
@@ -320,19 +327,19 @@ TODO:
 
   Special |registers|
     Usage
-      '"'     unnamed register, containing the text of the last delete or yank
-      '0'		last yank
-      '1-9'   last delete (1) incrementing to (9)
-      '%'     current file name
-      '#'     alternate file name, https://devhints.io/vim
-      '*'    clipboard contents (X11: primary selection)
-      '+'     clipboard contents
-      '/'     last search pattern
-      ':'     last command-line
-      '-'     last small (less than a line) delete
-      '.'     last inserted text
-      '_'	  black hole register
-      'q'	  default macro register
+      `'"`     unnamed register, containing the text of the last delete or yank
+      `'0`     last yank
+      `'1-9`   last delete (1) incrementing to (9)
+      `'%`     current file name
+      `'#`     alternate file name, https://devhints.io/vim
+      `'*`     clipboard contents (X11: primary selection)
+      `'+`     clipboard contents
+      `'/`     last search pattern
+      `':`     last command-line
+      `'-`     last small (less than a line) delete
+      `'.`     last inserted text
+      `'_`     black hole register
+      `'q`     default macro register
       [a-z] normal registers
     Check the resistors content
       `:reg`
@@ -340,7 +347,7 @@ TODO:
       `:reg` "
     To append to register just capitalize the |register|
       `"Ayiw`
-    Access the expression |resistor| in insert mode and do some math
+    Access the expression |resistor| in insert-mode and do some math
       `<C-R>` =
     Repeat the last macro or execute the default register "q
       `@@`
@@ -582,38 +589,39 @@ TODO:
     NOTE 
       movement commands with g and arrows dont work, all the other work fine like:
       h j k l w W e E b B f F t T 0 ^ $ % |
-    `<C-N>`                       => Select next ocurrence of word
-    `<C-S-Up>`                    => Create one cursor up
-    `<C-S-Down>`                  => Create one cursor down
-    `<Tab>`                       => switch bettewn cursor(normal) extend(visual) modes
-    `[`                           => goto next selection
-    `]`                           => goto previous selection
-    `q`                           => skip selection and go to next
-    `Q`                           => remove region from selection
+    normal-mode
+      `<C-N>`                       => Select next ocurrence of word
+      `<C-S-Up>`                    => Create one cursor up
+      `<C-S-Down>`                  => Create one cursor down
+      `<Tab>`                       => switch bettewn cursor(normal) extend(visual) modes
+      `[`                           => goto next selection
+      `]`                           => goto previous selection
+      `q`                           => skip selection and go to next
+      `Q`                           => remove region from selection
 
   |vim-illuminate|
     `<M-n>`                       => next occurrence of word
     `<M-p>`                       => previous occurrence of word
 
   |cmp| auto compleat  
-		`<C-b>`                       => scroll_docs
-		`<C-f>`                       => scroll_docs
-		`<C-Space>`                   => complete
-		`<C-e>`                       => abort
-		`<CR>`                        => confirm
+    `<C-b>`                       => scroll_docs
+    `<C-f>`                       => scroll_docs
+    `<C-Space>`                   => complete
+    `<C-e>`                       => abort
+    `<CR>`                        => confirm
 
   |nvim-surrond| 
     For examples check 
-      ``:help nvim-surrond
-    normal mode options
-      **ys{motion}{char}**      => add surrounding
-      **ysa{char1}{char2}**     => append surrounding {char2} to surrounding {char1}
-      **ysi{char1}{char2}**     => issert surrounding {char1} to surrounding {char2}
-      *ys{motion}t....*       => add a tag, after pressing `t` a prompt will appear 
-      **cs{char1}{char2}**      => change surrounding {char1} to surrounding {char2}
-      **ds{char}**              => delete surrounding
-    visual mode options
-      **S{char}**               => add surround
+      `:help nvim-surrond`
+    normal-mode options
+      `ys{motion}{char}`      => add surrounding
+      `ysa{char1}{char2}`     => append surrounding {char2} to surrounding {char1}
+      `ysi{char1}{char2}`     => issert surrounding {char1} to surrounding {char2}
+      `ys{motion}t....`       => add a tag, after pressing `t` a prompt will appear 
+      `cs{char1}{char2}`      => change surrounding {char1} to surrounding {char2}
+      `ds{char}`              => delete surrounding
+    visual-mode options
+      `S{char}`               => add surround
 
   |LSP|
     Diagnostics (errors/warnings) of LSP
