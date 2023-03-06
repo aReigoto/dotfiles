@@ -5,7 +5,7 @@ end
 
 configs.setup({
 	 -- one of "all" or a list of languages
-	ensure_installed = {"lua", "python", "cpp"},
+	ensure_installed = {"lua", "python"},
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
