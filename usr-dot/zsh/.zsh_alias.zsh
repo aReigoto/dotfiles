@@ -32,3 +32,12 @@ function jpqt() {
   fi
 }
 
+function jplab() {
+  if [ $# -eq 0 ]
+  then
+    conda activate nvim
+  else
+    conda activate $1
+  fi
+  jupyter-lab
+}
