@@ -645,7 +645,7 @@ TODO:
       `<leader>lc`              => rename all occurrences of token across project
       `<leader>lo`              => code_action, auto organize imports and more...
       `<leader>lr`              => references list all references across the project in split window
-      `<leader>fk`               => formatting
+      `<leader>lk`              => formatting
 
   |DAP| Debug application protocol
     `<leader>db`               => toggle_breakpoint
