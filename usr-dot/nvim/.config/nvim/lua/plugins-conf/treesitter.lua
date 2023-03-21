@@ -158,7 +158,6 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.o2 = {
   install_info = {
     url = "https://github.com/aReigoto/tree-sitter-o2", -- local path or git repo
-    -- url = "/Users/andre/Library/CloudStorage/OneDrive-LeicaCameraAG/02-Personal/neovim-dev/tree-sitter-o2",
     files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
     -- optional entries:
     branch = "main", -- default branch in case of git repo if different from master
