@@ -344,6 +344,8 @@ return packer.startup(function(use)
     disable = true,
   }
 
+  use { "aReigoto/o2-syntax" }
+
 --[[
 
   -- Icons for cmd
