@@ -678,6 +678,11 @@ TODO:
   |vim-zoom|
     `<C-w>m`          => zoom the current window (is is mapped to <leader>z)
 
+  |Harpoon|
+    <leader>h         => toggle quick menu
+    <leader>ha        => add file to the harpoon list
+    <leader>h1        => go to file 1 in the harpoon list (key maps are configd to go to files 1 to 4)
+
 
 https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f
 https://alpha2phi.medium.com/neovim-for-beginners-packer-manager-plugin-e4d84d4c3451
