@@ -344,7 +344,9 @@ return packer.startup(function(use)
     disable = true,
   }
 
-  use { "aReigoto/o2-syntax" }
+  use { "aReigoto/o2-syntax" ,
+    -- disable = true,
+  }
 
 --[[
 
