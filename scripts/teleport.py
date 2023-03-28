@@ -7,13 +7,13 @@ from json import dump as jdump
 from pathlib import Path
 from re import match, IGNORECASE
 from sys import exit
-
+from subprocess import run, PIPE, call 
 # %%
 # environ["TLP_DIR"] = "."
 base_dir = Path.home() / '.local' / 'state' / 'teleport'
 TLP_FILE = base_dir / 'teleport-paths.json'
 PORTAL_PATH = base_dir / 'portal'
-
+EDITOR = environ.get('EDITOR', default='nvim') #that easy!
 # %%
 help = """Teleport [portal_alias | portal_n] [(-c | --create) [portal_alias] [-e | --edit] [-h | --help] 
 where:
@@ -131,7 +131,7 @@ def help_meassage():
     print(help)
 
 def edit_portarls():
-    print('Works under construction!')
+    call([EDITOR, TLP_FILE])
 
 def menu_create(portals, alias=None):
     portals_tmp = create_portal(portals, alias)
