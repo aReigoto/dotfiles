@@ -30,6 +30,7 @@ Short cut: press * to go and # to come back
   |insert-mode-features| 
   |visual-mode|
   |markers|
+  |jumplist-changelist|
   |register| 
   |multiple-files-manipulation|
   |folding|
@@ -319,11 +320,46 @@ TODO:
       `:'<,'>sort`
 
   |markers|
-    `m[a-z]` => create a marker named a to z on current position
-    `m[A-Z]` => create a marker named A to Z on current position across files
-    `'[a-z]` => go to first char of the line marked from a to z
-    ``[a-z]` => go to the exact char marked
-    '''     => go to the last jump
+    :marks   => see current markers
+
+    Create Markers
+      `m[a-z]` => create a marker named a to z on current position               eg: *mj*
+      `m[A-Z]` => create a marker named A to Z on current position across files  eg: *mJ*
+      `m'`   => add a jump to the jumplist, this is not a maker!
+    
+    Markers type
+      [a-z]
+      [A-Z]
+      [0-9]  => 
+      .      => last modified line
+      ^      =>
+      <      =>
+      >      =>
+      [      =>
+      ]      =>
+
+    Go to marker
+      *'* => go to first char of the line marked [a-zA-z] eg: *'j*
+      *`* => go to the exact char marked [a-zA-z]         eg: *`j*
+
+      TODO: are markers the same that jumplist ?
+            what are the markers [0-9] ?
+            :help makers
+            :marks
+            :help jumps
+            :jumps
+      
+  |jumplist-changelist|
+    Normal mode commands
+    :jumps  => see current jumplist
+    ''      => go to the last jump
+    <C-o>   => go back in the jumplist
+    <C-i>   => go forward in the jumplist
+    <Tab>   => go forward in the jumplist
+    g;      => go backward in the changelist
+    g,      => go forward in the changelist
+
+
 
   Special |registers|
     Usage
