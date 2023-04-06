@@ -85,6 +85,7 @@ return packer.startup(function(use)
   use { "easymotion/vim-easymotion" }
   -- Alternative to check
   -- use {"justinmk/vim-sneak"}
+  -- use {"ggandor/leap.nvim"}
 
   -- Tmux and vim window navegation
   use { "christoomey/vim-tmux-navigator",
