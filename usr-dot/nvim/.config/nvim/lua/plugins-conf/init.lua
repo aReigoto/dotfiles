@@ -345,6 +345,10 @@ return packer.startup(function(use)
     disable = true,
   }
 
+  use { "aReigoto/ts-tools-o2" ,
+    -- disable = true,
+  }
+
   use { "aReigoto/o2-syntax" ,
     -- disable = true,
   }
