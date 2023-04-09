@@ -4,9 +4,19 @@ if not cmp_dictionary_ok then
 end
 
 cmp_dictionary.setup({
-  dic = {
+  -- The following are default values.
+  -- exact = 2,
+  -- first_case_insensitive = true,
+  -- document = true,
+  -- debug = false,
+})
+
+cmp_dictionary.switcher({
     -- ["*"] = { "/usr/share/dict/words" },
-    ["O2"] = { vim.fn.expand("~/.config/nvim/spell/O2.dic") },
+    -- ["O2"] = { vim.fn.expand("~/.config/nvim/spell/O2.dic") },
+    filetype = {
+      o2 = { vim.fn.expand("~/.config/nvim/spell/o2.dict") },
+    }
     -- ["javascript,typescript"] = { "path/to/js.dic", "path/to/js2.dic" },
     -- filename = {
     --   ["xmake.lua"] = { "path/to/xmake.dic", "path/to/lua.dic" },
@@ -17,13 +27,6 @@ cmp_dictionary.setup({
     -- spelllang = {
     --   en = "~/.config/nvim/spell/test.dict",
     -- },
-  },
-  -- The following are default values.
-  exact = 1,
-  first_case_insensitive = true,
-  document = true,
-  debug = false,
 })
-
 -- For lazy loading
 -- cmp_dictionary.update()

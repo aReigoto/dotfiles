@@ -74,7 +74,7 @@ cmp.setup({
    	{ name = 'nvim_lsp_signature_help'},
 		{ name = 'luasnip' },
    	{ name = "treesitter" },
-   	{ name = "dictionary"},
+   	{ name = "dictionary", keyword_length=2},
 	}, {
 		{ name = 'buffer' },
 		{ name = "path" },
