@@ -5,9 +5,11 @@ from os import environ
 from json import load as jload
 from json import dump as jdump
 from pathlib import Path
-from re import match, IGNORECASE
+from re import match, IGNORECASE, sub
 from sys import exit
 from subprocess import run, PIPE, call 
+import logging
+
 # %%
 # environ["TLP_DIR"] = "."
 base_dir = Path.home() / '.local' / 'state' / 'teleport'
@@ -15,7 +17,8 @@ TLP_FILE = base_dir / 'teleport-paths.json'
 PORTAL_PATH = base_dir / 'portal'
 EDITOR = environ.get('EDITOR', default='nvim') #that easy!
 # %%
-help = """Teleport [portal_alias | portal_n] [(-c | --create) [portal_alias] [-e | --edit] [-h | --help] 
+HELP = """Teleport [portal_alias | portal_n] [(-c | --create) [portal_alias] [-e | --edit] [-h | --help] 
+NOTE: Sapces and tabs are not alowed for teleport alias
 where:
     -c | --create   :  create a portal in pwd
     -d | --destroy  :  destroy a portal
@@ -84,11 +87,13 @@ def yes_or_no(question=''):
 def get_alias():
     print('Please provide a valid alias for the portal')
     alias = input('> ')
+    alias = sub(r'\s', '', alias)
     return alias
 
 def get_alias_or_n():
     print('Please provide a valid alias for the portal')
     alias = input('> ')
+    alias = sub(r'\s', '', alias)
     return alias
 
 
@@ -128,7 +133,7 @@ def deleat_portal(portals, alias=None, n=None):
         return False
 
 def help_meassage():
-    print(help)
+    print(HELP)
 
 def edit_portarls():
     call([EDITOR, TLP_FILE])
@@ -166,10 +171,15 @@ def menu(portals):
     anwser = input('> ')
     if ( m:=match(r'^(-c|--create)(?:$|\s+)(.*)?', anwser, IGNORECASE) ):
         groups = m.groups()
+        logging.debug(f"regex match for create\n\t{groups}")
         if len(groups) > 0:
+            logging.debug(f"regex match for create > 0\n\t{groups[1]}")
             menu_create(portals, alias=groups[1])
         else:
-            menu_create(alias=None)
+            menu_create(portals, alias=None)
+
+        printEnumDict(portals)
+        return menu(portals)
 
     elif  ( m:=match(r'^(-d|--destroy)(?:$|\s+)(.*)?', anwser, IGNORECASE) ):
         groups = m.groups()
@@ -191,7 +201,7 @@ def menu(portals):
         return menu(portals)
 
     elif  ( m:=match(r'^(-q|--quit)$', anwser, IGNORECASE) ):
-        exit(0)
+        exit(1)
 
     elif  ( m:=match(r'^(\d+)$', anwser, IGNORECASE) ):
         # print(m.groups())
@@ -202,8 +212,9 @@ def menu(portals):
             return menu(portals)
 
     elif  ( m:=match(r'^(\S+)$', anwser, IGNORECASE) ):
+        logging.debug(f"regex match \\S+ > 0\n\t{m}")
         if go(portals, alias=m[0]):
-            exit(1)
+            exit(0)
         else:
             print('No portal with that alias, please try again!')
             return menu(portals)
@@ -215,6 +226,18 @@ def menu(portals):
 
 # %%
 if __name__ == '__main__':
+    # level=logging.DEBUG
+    # level=logging.INFO
+    level=logging.WARNING
+    # level=logging.ERROR
+    # level=logging.CRITICAL
+    logging.basicConfig(
+        level=level,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        # filename="basic.log"
+        )
+
     # white_portal()
     portals = load(TLP_FILE)
     
