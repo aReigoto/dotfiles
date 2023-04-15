@@ -201,6 +201,7 @@ def menu(portals):
         return menu(portals)
 
     elif  ( m:=match(r'^(-q|--quit)$', anwser, IGNORECASE) ):
+        # Exit with a code error so that the tlp zsh alias doesn't exectute the cd $(cat ...)
         exit(1)
 
     elif  ( m:=match(r'^(\d+)$', anwser, IGNORECASE) ):
