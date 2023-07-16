@@ -2,20 +2,26 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	safecrlf = true
+	editor = nvim
+	pager = more
 [alias]
-	ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
-	lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
-	ca = commit -a -m
-	s = status -uall
-	p = pull
-	f = fetch --quiet
-	ls = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+	lll1 = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+	lll2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+	lll3 = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+	lll4 = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+	lll5 = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\"
+	lll6 = log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --compact-summary
+  l = log --oneline
+  ll = log --stat
+  lol = log --oneline --graph --all
 	la = !git config -l | grep alias | cut -c 7-
-	lb = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\"
-	lla = log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --compact-summary
+  lc = git config --list --show-origin
+	p = pull
+	f = fetch
+  s = status
+  b = branch
+  c = commit
+  co = checkout
+  sync = !git pull && git push
 [include]
-    path = .git_user_info
-[user]
-	email = 18371208+aReigoto@users.noreply.github.com 
-	name = aReigoto
+   path = .git_user_info
