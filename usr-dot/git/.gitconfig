@@ -3,7 +3,7 @@
 	autocrlf = input
 	safecrlf = true
 	editor = nvim
-	pager = more
+  #	pager = more
 [alias]
 	lll1 = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
 	lll2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
@@ -15,7 +15,7 @@
   ll = log --stat
   lol = log --oneline --graph --all
 	la = !git config -l | grep alias | cut -c 7-
-  lc = git config --list --show-origin
+  lc = !git config --list --show-origin
 	p = pull
 	f = fetch
   s = status
