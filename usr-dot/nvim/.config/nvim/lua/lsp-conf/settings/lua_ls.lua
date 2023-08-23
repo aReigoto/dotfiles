@@ -10,6 +10,7 @@ return {
 			},
 			-- Make the server aware of Neovim runtime files
 			workspace = {
+        -- library = { vim.env.VIMRUNTIME }
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
