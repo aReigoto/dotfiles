@@ -10,6 +10,7 @@
         "when": "textInputFocus"
     },
     {
+        // Disable original
         "key": "shift+alt+cmd+down",
         "command": "-cursorColumnSelectDown",
         "when": "textInputFocus"
@@ -20,8 +21,21 @@
         "when": "textInputFocus"
     },
     {
+        // Disable original
         "key": "shift+alt+cmd+up",
         "command": "-cursorColumnSelectUp",
         "when": "textInputFocus"
+    },
+    {
+        // Set equal to windows
+        "key": "ctrl+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        // Disable original
+        "key": "cmd+d",
+        "command": "-editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
     }
 ]
