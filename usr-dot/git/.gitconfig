@@ -25,3 +25,5 @@
   sync = !git pull && git push
 [include]
    path = .git_user_info
+[init]
+	defaultBranch = main
