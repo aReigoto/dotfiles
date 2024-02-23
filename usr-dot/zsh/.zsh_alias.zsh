@@ -10,6 +10,8 @@ alias cndls="conda env list"
 alias jplab="jupyter-lab"
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 alias ipy='ipython3'
+alias history_disable='fc -p /dev/null'
+alias history_enable='fc -P'
 # ========== Jupyter tools ==========
 
 alias jpkl='jupyter kernelspec list'
