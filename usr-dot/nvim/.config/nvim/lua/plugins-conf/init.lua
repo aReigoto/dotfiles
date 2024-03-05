@@ -345,12 +345,14 @@ return packer.startup(function(use)
     disable = true,
   }
 
+  -- File detect 
   use { "aReigoto/ts-tools-o2" ,
     -- disable = true,
   }
 
+  -- O2 Syntax using vim
   use { "aReigoto/o2-syntax" ,
-    -- disable = true,
+    disable = true,
   }
 
 --[[
