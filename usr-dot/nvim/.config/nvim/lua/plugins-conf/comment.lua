@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+require('ts_context_commentstring').setup {}
+
 comment.setup {
   pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 --[[
@@ -37,3 +39,4 @@ local ft = require('Comment.ft')
 
 -- Create commentstring for O2 files
 ft({'o1m', 'o2m', 'rle'}, {'//%s', '/*%s*/'})
+
