@@ -1,0 +1,51 @@
+- defaults:
+    link:
+      relink: true
+      
+- clean: 
+    ['~', '~/.config', ~/.local/scripts]
+
+- shell:
+    [ 'find . -name ".DS_Store" -exec rm {} \;' ]
+
+- create:
+    - ~/.config
+    - ~/.local/scripts
+    - ~/.jupyter
+
+- link:
+    # Link files
+    ~/.tmux.conf: usr-dot/tmux/.tmux.conf
+    ~/.pythonrc: usr-dot/python/.pythonrc
+    ~/.condarc: usr-dot/conda/.condarc
+    ~/.oh-my-zsh/themes/agnosterArc.zsh-theme: usr-dot/oh-my-zsh/.oh-my-zsh/themes/agnosterArc.zsh-theme
+    ~/.jupyter: 
+        glob: true
+        path: usr-dot/jupyter/.jupyter/*
+    # Link folders
+    #~/.config/nvim: usr-dot/nvim-sever/.config/nvim/
+    ~/.matplotlib: usr-dot/matplotlib/.matplotlib/
+
+# Link multiple files
+- link:
+    ~/:
+        glob: true
+        path: usr-dot/bash/.*
+
+- link:
+    ~/:
+        glob: true
+        path: usr-dot/git/.*
+
+- link:
+    ~/:
+        glob: true
+        path: usr-dot/zsh/.*
+
+- link:
+    ~/.local/scripts:
+        glob: true
+        path: scripts/*
+
+- shell:
+        - [git submodule update --init --recursive, Installing submodules]
