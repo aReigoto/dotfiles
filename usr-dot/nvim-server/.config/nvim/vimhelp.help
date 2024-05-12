@@ -1,0 +1,727 @@
+
+==============================================================================
+1. About                                                     *my-vim*
+Vim commands for customising
+
+------------------------------------------------------------------------------
+Short cut: press * to go and # to come back
+
+*Vim-core*
+  |cheatsheets|
+  |vanila-start|
+  |vim-help|
+  |messages|
+  |key-notation|
+  |mappings|
+  |inspect-variables
+  |sourced-files
+  |input-from-shell|
+  |formatting-text|
+  |modes|
+  |buffers-windowns-tab|
+  |tabs|
+  |windows|
+  |case-change|
+  |movement-nomal-mode
+  |matching-braces| 
+  |increment|
+  |decrement|
+  |go-to-insert-mode|
+  |insert-mode-features| 
+  |visual-mode|
+  |markers|
+  |jumplist-changelist|
+  |register| 
+  |multiple-files-manipulation|
+  |folding|
+  |regex|
+  |auto-complete|
+  |inspect-key-codes| 
+  |diff|
+  |run-native-code|
+  |file-path|
+
+*My-Mappings*
+  |normal-mode|
+  |insert-mode|
+  |visual-mode|
+
+*Plugins*
+  |Comment|
+  |easymotion|
+  |nvim-tree|
+  |Telescope|
+  |vim-visual-multi|
+  |vim-illuminate|
+  |cmp|
+  |nvim-surrond|
+  |LSP|
+  |DAP|
+  |Toggleterm|
+  |tabular|
+  |lazygit|
+
+TODO: 
+  https://vim.fandom.com/wiki/Add_your_note_files_to_Vim_help
+  https://vim.fandom.com/wiki/Keep_a_to-do_memo_file_with_links_as_in_Vim_help
+
+  :h omnifunc
+  :h compl-omni-filetypes
+  :h popupmenu-completion
+  https://vi.stackexchange.com/questions/4584/how-to-create-my-own-autocomplete-function
+  https://linuxhint.com/vim_auto_complete/
+
+  :h cmp
+  https://www.youtube.com/watch?v=gAsYolNrjtQ
+
+  :h lsp
+  https://www.youtube.com/watch?v=tlrSQiwvhi0
+------------------------------------------------------------------------------
+
+  |cheatsheets| and info
+    https://learnvimscriptthehardway.stevelosh.com
+    https://devhints.io/vim
+    https://devhints.io/vimscript
+    http://vimdoc.sourceforge.net/vimum.html
+    http://bullium.com/support/vim.html
+    http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
+    http://www.brianstorti.com/vim-registers/
+    https://sanctum.geek.nz/arabesque/advanced-vim-registers/
+    http://www.symbolundefined.com/index.php/2017/04/29/vim-buffers-windows-and-tabs/
+
+  |vanila-start|
+    `nvim` --clean
+
+  |vim-help|
+    Useful help files:
+      `:help` help.txt
+      `:help` helphelp
+      `:help` index                   => index with default mappings and commands
+      `:help` key-notation            => information on control alt and other special characters
+    Navegation on help files
+      `g` ]                           => to "open" a tag
+      `<C-o>`                         => go to previus position
+      `<C-i>`                         => go to next position (invserse of <C-o>)
+    Vim documentation shot cuts, use tab while typing 
+      `:help` CTRL
+
+  |messages|
+    Show previous echo and log messages
+      `:messages`
+
+  |mappings| currently defined 
+    `:map`
+    `:map-alt-keysinoremap` 
+    `:map` <C-p>                  mappings for all modes that have <C-p> 
+    `:nmap`
+    `:nmap` <leader>              mappings in normal mode that have <leader>
+    `:verbose` imap               mappings an their definition for insert mode
+    `:Telescope` keymaps          This needs a plugin
+
+  |sourced-files| check the scriptnames that were loaded
+    :h 'runtimepath'
+    `:scriptnames`
+
+  |inspect-variables| of vim
+    `:set` expandtab?
+    `:echo` g:colors_name
+
+  |input-from-shell| command and send STDOUT to buffer
+   `:help` :w_c
+     On the current line
+     `:.!echo` {1..5}
+  Rewire the whole buffer With
+     `:%!echo` {1..5}
+  Rewire a visual selection
+     `:'<,'>!echo` {19..30}
+  Alternative
+     `:r[ead]` !echo {1..6}
+
+  |formatting-text|
+    `:help` formatting
+    `:[range]ce[nter]` [width]
+    `:[range]ri[ght]` [width]
+    `:[range]le[ft]` [indent]
+
+  |modes|
+    Insert Mode 
+      `i`
+      `I`
+      `o`
+      `O`
+      `A`
+      `a`
+    Command Mode 
+      `:` 
+      `Q` (Ex-Mode execute multiple commnads)
+      From Insert Mode `<C-O>`
+    Replace Mode
+      `R`
+    Normal Mode
+      `ESC`
+    Visual Mode
+      `:help` Visual-mode
+        `v`
+        `V`		    (visual line)
+        `<C-v>`	  (visual block)
+        `<C-q>`	  (visual block)
+    Select Mode 
+
+  |buffers-windowns-tab| defenition:
+    http://www.symbolundefined.com/index.php/2017/04/29/vim-buffers-windows-and-tabs/
+    A buffer is the in-memory text of a file.
+    A window is a viewport on a buffer.
+    A tab page is a collection of windows.
+   
+   |tabs|
+     `:tabnew %`                Create a new tab with the current buffer  
+     `:tabe[dit]` filename      Open filename in a new tab
+     `:tabs`                    Show a list of tabs
+     `<C-W>` T	              Move current split window into its own tab
+     `:q`	              Close window, closing tab if it contains a single window
+     `:tabc[lose]`	      Close the current tab page and all its windows
+     `:tabo[nly]`	      Close all tabs apart from the current one
+     `gt`	              Move to next tab
+     `gT`                       Move to previous tab
+     `#gt`                      Move to tab number #
+   
+  |windows|
+    `<C-w>=`                  => Resize to equal space
+    `<C-w>v`                  => Vertical split
+    `<C-w>s`                  => Horizontal split
+    `<C-w>l`                  => Go to window on the right
+    `<C-w>h`                  => Go to window on the left
+    `<C-w>j`                  => Go to window on the bottom 
+    `<C-w>k`                  => Go to window on top
+    `<C-w>r`                  => Rotate windows position
+    `<C-w>H`                  => Vertical to horizontal split, moves the current window to full-width at the very top
+    `<C-w>K`                  => Horizontal vertical to split, moves the current window to full-height at far left
+    `:vsplit`
+    `:vs BuffName`
+    `:vs #BuffNumber`
+
+  |case-change|
+    normal-mode and visual-mode, for more command check :help ~
+      `~`               => switch case
+      `g~{motion}`      => switch case of {motion} text
+      `g~~`             => switch case of current line
+      `gu{motion}`      => lower case of {motion} text
+      `gU{motion}`      => uper case of {motion} text
+    visual-mode
+      `u`               => lower case of text
+      `U`               => uper case of text
+      `o`               => go to the other side of selection 
+
+  |movement-nomal-mode
+    `*`       => move to next matching word under the cursor
+    `#`       => move to previous matching word under the cursor
+    `-`       => first non-blank character of previous line
+    `+`       => first non-blank character of next line
+    `0`       => go-to-beginning-of-line
+    `^`       => first non-blank character of a line
+    `_`       => first non-blank character of a line 
+    `$`       => go-to-end-of-line
+    `g_`      => last non-blank character of a line
+    `<C-o>`   => move back cursor/file
+    `<C-i>`   => move forward cursor/file
+    `D`       => delete to the end of the line
+    `gs`      => select the last pasted text
+    `f`       => Find forward a character
+    `F`       => Find backward a character
+    `t`       => Till forward a character
+    `T`       => Till backward a character
+    `;`       => Go to next find/till match
+    `,`       => Go to previous find/till match
+    `x`       => Delete a single character
+    `<C-a>`   => |increment| number or alphabetic character at or after the cursor
+    `<C-x>`   => |decrement| number or alphabetic character at or after the cursor
+    `z<CR>`   => move secrean to the top and cursor to the first non-blank char
+    `zt`      => move secrean to the top keap the cursor ant the same possition 
+    `z.`      => move secrean to the center and cursor to the first non-blank char
+    `zz`      => move secrean to the center keap the cursor ant the same possition 
+    `z-`      => move secrean to the bottom and cursor to the first non-blank char
+    `zb`      => move secrean to the bottom keap the cursor ant the same possition 
+    
+  
+  Move to |matching-braces|
+    `%`
+
+  |go-to-insert-mode|
+    `o`       => Line below
+    `O`       => Line above
+    `i`       => In current position
+    `I`       => At the end of the line
+    `a`       => One character After
+    `A`       => At the end of the line
+    `s`       => Substitute (delete and insert) a single character go to insert
+    `S`       => Substitute to the end of the line
+    `c`       => Change (delete and insert) 
+    `ciw`     => Change inside word
+    `ci(`     => Change inside ()
+    `ci[`     => Change inside []
+    `ci{`     => Change inside {}
+    `cip`     => Change inside paragraph
+    `ca(`     => Change all (inside and surrounding character) ()
+    `C`       => Change to the end of the line 
+
+  |insert-mode-features| keys in insert mode
+    :h ins-special-keys
+      `<C-o>`                             allows execute one command in insert mode
+      `<C-o>` !! curl https://google.com  Executing command line
+      `<C-o>` !! pwd                      Executing command line
+      `<C-o>` 100ihello                   Repeating text
+      `<C-o>` 10Ahello                    Repeating text
+      `<C-o>` zz                          center window
+      `'<C-o>` H/M/L                       jump to top/middle/bottom window
+      `<C-o>` 'a                          jump to mark 'a'
+      `<C-o>` D                           delete everything to the right of cursor
+      `<C-r>`                             Inserting from register
+      `<C-r>` a                           Inserting from register a
+      `<C-r>` =@a                         Inserting from register a
+      `<C-r>` "                           insert the last yank/delete
+      `<C-r>` %                           insert file name         
+      `<C-r>` /                           insert last search term  
+      `<C-r>` :                           insert last command line 
+      `<C-r>` =HelloFunc()                insert the outplu of the func
+      `<C-w>`                             delete word to the left of cursor
+    Movements
+      `<C-w>`                             Delete the previous word
+      `<C-u>`                             delete everything to the left of cursor
+      `<C-h>`                             backspace/delete
+      `<C-t>`                             indent current line
+      `<C-d>`                             un-indent current line
+      `<C-j>`                             insert newline (easier than reaching for the return key)
+      `<C-g>k`                            go to line above in the same position were insert mode started
+      `<C-g>j`                            go to line below in the same position were insert mode started
+      `<S-Right>`                         move forward a word equivalent to w
+      `<S-Left>`                          move backward a word equivalent to b
+      `<C-a>`                             repeat the previous insert
+      `<A-b>`                             go back a word
+    Miscellaneous
+      `<C-x><C-y>`                        scroll up
+      `<C-x><C-e>`                        scroll down
+      `<C-x><C-l>`                        autocomplete insert a whole line
+      `<C-x><C-n>`                        autocomplete insert a text from current file
+      `<C-x><C-i>`                        autocomplete insert a text from included files
+      `<C-x><C-f>`                        autocomplete insert a file name
+      `<C-x><C-]>`                        autocomplete insert from tags (must have tags)
+      `<C-x><C-o>`                        autocomplete insert from omnicompletion. Filetype specific.
+      `<C-n>`                             autocomplete   
+      `<C-p>`                             autocomplete  
+
+  |visual-mode|
+    visual-block
+      `<C-v>` I       visual block selection and then insert mode I
+      `<C-v>` $A      to append at the end of the line 
+      `<C-v>` <       indentation
+      `<C-v>` >       indentation
+      `<C-v>g<C-a>`   iterate thou selection 
+    In visual mode select your text an sort it on with command mode 
+      `:'<,'>sort`
+
+  |markers|
+    :marks   => see current markers
+
+    Create Markers
+      `m[a-z]` => create a marker named a to z on current position               eg: *mj*
+      `m[A-Z]` => create a marker named A to Z on current position across files  eg: *mJ*
+      `m'`   => add a jump to the jumplist, this is not a maker!
+    
+    Markers type
+      [a-z]
+      [A-Z]
+      [0-9]  => 
+      .      => last modified line
+      ^      =>
+      <      =>
+      >      =>
+      [      =>
+      ]      =>
+
+    Go to marker
+      *'* => go to first char of the line marked [a-zA-z] eg: *'j*
+      *`* => go to the exact char marked [a-zA-z]         eg: *`j*
+
+      TODO: are markers the same that jumplist ?
+            what are the markers [0-9] ?
+            :help makers
+            :marks
+            :help jumps
+            :jumps
+      
+  |jumplist-changelist|
+    Normal mode commands
+    :jumps  => see current jumplist
+    ''      => go to the last jump
+    <C-o>   => go back in the jumplist
+    <C-i>   => go forward in the jumplist
+    <Tab>   => go forward in the jumplist
+    g;      => go backward in the changelist
+    g,      => go forward in the changelist
+
+
+
+  Special |registers|
+    Usage
+      `'"`     unnamed register, containing the text of the last delete or yank
+      `'0`     last yank
+      `'1-9`   last delete (1) incrementing to (9)
+      `'%`     current file name
+      `'#`     alternate file name, https://devhints.io/vim
+      `'*`     clipboard contents (X11: primary selection)
+      `'+`     clipboard contents
+      `'/`     last search pattern
+      `':`     last command-line
+      `'-`     last small (less than a line) delete
+      `'.`     last inserted text
+      `'_`     black hole register
+      `'q`     default macro register
+      [a-z] normal registers
+    Check the resistors content
+      `:reg`
+      `:reg` 0
+      `:reg` "
+    To append to register just capitalize the |register|
+      `"Ayiw`
+    Access the expression |resistor| in insert-mode and do some math
+      `<C-R>` =
+    Repeat the last macro or execute the default register "q
+      `@@`
+
+  |macros|
+    Record a macro, in normal mode press q to start and q to end
+      `q[a-z]{comands}q`        => record the macro o a regular register [a-z]
+    Execute a macro
+      `@[a-z]`                  => execute macro stored in register [a-z]
+      `<number>@[a-z]`          => execute macro stored in register [a-z] a <number> of times
+      `@@`                      => execute the previously execute macro
+    Edit macro/register
+      Option 1 Use "" not '' 
+        `:let` @a="o<C-r>a\<Esc>"
+        `:let` @a="oHello World!\<CR>bye\<Esc>"
+      Option 2 Treat it like a normal register
+        paste the content of the macro and yank
+        back to the register cons: <C-*> wont work
+        and be careful to not yank the end of line
+      To append to register just capitalize the |register|
+        `"Ayiw`
+
+  |multiple-files-manipulation| that are in buffers windows and tabs
+    `:bufdo` %s/pattern/replace/ge || update
+    `:bufdo` execute "normal! @a" || update
+    `:windo`
+    `:tabdo`            https://devhints.io/vim
+    `:wa`								write all
+  Argument list, this can be used to do a substitution on multiple files
+    `:args` `find . -name '*.txt'`
+    `:args`
+    `:argdo` :%s/bananas/morangos/g | w
+
+  |folding| commands
+    `zc` individual close
+    `zo` individual open
+    `za` individual toggle
+    `zm` folds all ; more folding
+    `zr` unfolds all ; reduce fold 
+    `zf` manual fold
+
+  Use Very Magic for the real |regex|
+    http://vimregex.com/
+      `:help` magic
+      `/\v`
+      `:s/\v(CapturingGroup1|orSomethingElse)moreRegex` stuf/NewStuf \1/
+
+    After a search you can do a substitution just by doing
+      `:s//NewStuf/`
+    
+    perl     vim
+    (?:)     %()   => Non capture group
+    (?!)     ()@!  => negative look around
+    ()?      (){-} => as few as possible
+
+    Example to use with print py2 to print py3
+      %s/\v(^\s{-}print)\s+%(\()@!(.*)/\1(\2)/c
+
+  |auto-complete|
+    :h ins-completion
+    `<C-p,n>`       => show completion optionshttps://devhints.io/vim
+    `<C-x><C-l>`    => Whole lines
+    `<C-x><C-n>`    => keywords in the current file
+    `<C-x><C-k>`    => keywords in 'dictionary'
+    `<C-x><C-t>`    => keywords in 'thesaurus', thesaurus-style
+    `<C-x><C-i>`    => keywords in the current and included files
+    `<C-x><C-]>`    => tags
+    `<C-x><C-f>`    => file names
+    `<C-x><C-d>`    => definitions or macros
+    `<C-x><C-v>`    => Vim command-line
+    `<C-x><C-u>`    => User defined completion
+    `<C-x><C-o>`    => omni completion
+    `<C-x>s`        => Spelling suggestions (in insert mode)
+    `z=`            => Spelling suggestions showed in new window (normal mode)
+    `<C-n>`         => keywords in 'complete' on buffer
+
+  |Spell|
+    :Spell        => My costume comand to activate spellchek
+
+
+  |inspect-key-codes| 
+    Run in terminal the sed command to see the key codes.
+      `$` sed -n l
+        ^[[1;9D 
+    Run in the terminal hexdump -C or xxd, exit the command by pressing <C-d>
+    on a new line, exemple:
+      `$` hexdump -C <C-Up><CR><C-d>
+    Output, note 0a is <CR>:
+      `$` hexdump -C --
+      ^[[1;5A
+      00000000  1b 5b 31 3b 35 41 0a                      |.[1;5A.|
+      00000007
+
+    In vim go to insert mode and press <C-v> or <C-q> then press you key 
+      combination! The output is what vim is catching
+
+    To use this in a mapping do
+      map <Esc>[1;9D SOME_COMAND 
+      NOTE: ^[ is <Esc>
+
+    key-codes that work, use this in iTerm
+      https://www.systutorials.com/docs/linux/man/5-user_caps/
+        <Alt+Up>: [1;3A
+        <Alt+Down>: [1;3B
+        <Alt+Right>: [1;3C
+        <Alt+Left>: [1;3D
+      https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058
+
+  |diff|
+    With two open buffers
+      `:windo diffthis`
+    With two open windows
+      `:difft[his]`
+    From the terminal
+      `$` nvim -f FILE1 FILE2
+    To disable use
+      :diffoff
+      :windo diffoff
+
+  |run-native-code| execute and load configs 
+    To run a vim file use:
+      :source %
+    To run a lua file use:
+      :luafile %
+    NOTE % represente the file in the currente buffer
+      Instead of % you can pass the path to a file
+
+  |file-path|
+    1<C-g>              => show the full path of the current buffer
+    2<C-g>              => show the full path of the current buffer and buffer number
+    :f[ile]             => relative path 
+    :ls                 => list open buffes
+    <C-r>%              => in insert mode, insert the relative path
+    <C-r>#              => in insert mode, insert the relative path
+
+*My-Mappings*
+
+    |normal-mode|
+      Better window navigation
+        `<C-h>`       ==    <C-w>h
+        `<C-j>`       ==    <C-w>j
+        `<C-k>`       ==    <C-w>k
+        `<C-l>`       ==    <C-w>l
+
+      Resize with arrows
+        `<C-Up>`      ==    ":resize -2<CR>
+        `<C-Down>`    ==    , ":resize +2<CR>
+        `<C-Left>`    ==    , ":vertical resize -2<CR>
+        `<C-Right>`   ==    ", ":vertical resize +2<CR>
+
+      Navigate buffers
+        `<S-l>`       ==    :bnext<CR>
+        `<S-h>`       ==    :bprevious<CR>
+
+      Clear highlights
+        `<leading>h`  ==    ", "<cmd>nohlsearch<CR>
+
+      Close buffers
+        `<S-q>`       ==    <cmd>Bdelete!<CR>
+
+    |insert-mode|
+      Press jk fast to enter
+        `jk`          ==    <ESC>
+
+    |visual-mode|
+      Stay in indent mode
+        `<`           ==    <gv
+        `>`           ==    >gv
+
+
+*Plugins*
+
+  |Comment|
+    normal-mode
+      `gcc`                     => Toggles the current line using linewise comment
+      `gbc`                     => Toggles the current line using blockwise comment
+      `[count]gcc`              => Toggles the number of line given as a prefix-count using linewise
+      `[count]gbc`              => Toggles the number of line given as a prefix-count using blockwise
+      `gc[count]{motion}`       => (Op-pending) Toggles the region using linewise comment
+      `gb[count]{motion}`       => (Op-pending) Toggles the region using blockwise comment
+      `gco`                     =>Insert comment to the next line and enters INSERT mode
+      `gcO`                     =>Insert comment to the previous line and enters INSERT mode
+      `gcA`                     =>Insert comment to end of the current line and enters INSERT mode
+    insert-mode
+      `gc`                      =>Toggles the region using linewise comment
+      `gb`                      =>Toggles the region using blockwise comment
+
+  |easymotion|
+    `<leader><leader>w`		    => highlight every next word's first letter 
+    `<leader><leader>b`		    => highlight every previous word's first letter 
+    `<leader><leader>k`         => Line upward
+    `<leader><leader>j`         => Line downward
+    `<leader><leader>s{char}`   => Search {char} forward and backward
+    `<leader><leader>f{char}`   => Find {char} to the right
+    `<leader><leader>t{char}`   => Till before the {char} to the right.
+
+  |nvim-tree|
+    :help nvim-tree-default-mappings
+    Open
+      `<leader>e`               => show files of current folder
+    In nvim-tree
+      `l`                       => open file
+      `<CR>`                    => open file
+      `o`                       => open file
+      `h`                       => close node
+      `v`                       => open in vertical split
+      `r`                       => rename
+      `y`                       => copy name to system clipboard
+      `Y`                       => copy relative path to system clipboard
+      `R`                       => refresh the nvim-tree
+      `a`                       => add a file; leaving a trailing `/` will add a directory
+      `d`                       => delete file
+
+  |Telescope|
+    Open telescope
+      `<leader>ff`                => find_files
+      `<leader>ft`                => find text in current buffer 
+      `<leader>fp`                => projects
+      `<leader>fb`                => buffers
+      `<leader>fa`                => live_grep
+      `<leader>fh`                => help_tags
+
+    In Telescope
+      `<Down>`                    => cycle_history_next,
+      `<Up>`                      => cycle_history_prev,
+      `<C-j>`                     => move_selection_next,
+      `<C-n>`                     => move_selection_next,
+      `<C-k>`                     => move_selection_previous,
+      `<C-p>`                     => move_selection_previous,
+      `<C-w>`                     => send_to_qflist + actions.open_qflist,
+    From cmd prompt
+      `:Telescope` <Tab>          => See extra options
+      `:Telescope` buildin        => To inspect keymaps, commands, buffers etc...
+      `:Telescope` keymaps
+      `:Telescope` help_tags      => Navigate help files
+
+  |vim-visual-multi|
+    Mappings https://github.com/mg979/vim-visual-multi/wiki/Mappings
+    NOTE 
+      movement commands with g and arrows dont work, all the other work fine like:
+      h j k l w W e E b B f F t T 0 ^ $ % |
+    normal-mode
+      `<C-N>`                       => Select next ocurrence of word
+      `<C-S-Up>`                    => Create one cursor up
+      `<C-S-Down>`                  => Create one cursor down
+      `<Tab>`                       => switch bettewn cursor(normal) extend(visual) modes
+      `[`                           => goto next selection
+      `]`                           => goto previous selection
+      `q`                           => skip selection and go to next
+      `Q`                           => remove region from selection
+
+  |vim-illuminate|
+    `<M-n>`                       => next occurrence of word
+    `<M-p>`                       => previous occurrence of word
+
+  |cmp| auto compleat  
+    `<C-b>`                       => scroll_docs
+    `<C-f>`                       => scroll_docs
+    `<C-Space>`                   => complete
+    `<C-e>`                       => abort
+    `<CR>`                        => confirm
+
+  |nvim-surrond| 
+    For examples check 
+      `:help nvim-surrond`
+    normal-mode options
+      `ys{motion}{char}`      => add surrounding
+      `ysa{char1}{char2}`     => append surrounding {char2} to surrounding {char1}
+      `ysi{char1}{char2}`     => issert surrounding {char1} to surrounding {char2}
+      `ys{motion}t....`       => add a tag, after pressing `t` a prompt will appear 
+      `cs{char1}{char2}`      => change surrounding {char1} to surrounding {char2}
+      `ds{char}`              => delete surrounding
+    visual-mode options
+      `S{char}`               => add surround
+
+  |LSP|
+    Diagnostics (errors/warnings) of LSP
+      `<leader>lf`            => open_float window whit erros/warnings
+      `<leader>lp`            => goto_prev whit erro/warning
+      `<leader>ln`            => goto_next whit erro/warning
+      `<leader>lw`            => send info to a quickfixlist window
+      `<leader>lt`            => telescope window with diagnostics; press <C-w> to send the info to quickfixlist window 
+
+    Mappings LSP
+    See `:help` `vim.lsp.*` for documentation on any of the below functions
+      `<leader>lg`              => declaration
+      `<leader>le`              => definition
+      `<leader>li`              => implementation
+      `<leader>ld`              => type_definition
+      `<leader>lh`              => hover; show docstring in python
+      `<leader>ls`              => signature_help
+      `<leader>laf`             => add_workspace_folder
+      `<leader>lrf`             => remove_workspace_folder
+      `<leader>llf`             => list_workspace_folders
+      `<leader>lc`              => rename all occurrences of token across project
+      `<leader>lo`              => code_action, auto organize imports and more...
+      `<leader>lr`              => references list all references across the project in split window
+      `<leader>lk`              => formatting
+
+  |DAP| Debug application protocol
+    `<leader>db`               => toggle_breakpoint
+    `<leader>dc`               => continue
+    `<leader>di`               => step_into
+    `<leader>do`               => step_over
+    `<leader>dO`               => step_out
+    `<leader>dr`               => repl.toggle
+    `<leader>dl`               => run_last
+    `<leader>du`               => toggle
+    `<leader>dt`               => terminate
+
+  |Toggleterm|
+    `<leader>t`                    => toggle terminal window
+
+  |tabular|
+    Basic/Auto
+      `:Tabularize /,`                 => Aline the next lines concerning ,
+      `:Tab` /,                        => Just the same
+    Usage of lN cN rN for right center and left aligned, and N for the number of spaces
+        tabular will cycle the lN's for each line 
+      `:Tabularize` / => /l4l0         => this was the one used here, left aligned and 4 spaces ...
+    Advance regex
+      `:Tabularize` /regex/l1c2r3      => atom is defined in the regex them that is the match
+      `:Tabularize` /\v[.=]/r0c0l1c1l0
+
+  |lazygit|
+    `<leader>tg`      => Spawn a toggleterm window with lazygit
+
+  |vim-zoom|
+    `<C-w>m`          => zoom the current window (is is mapped to <leader>z)
+
+  |Harpoon|
+    <leader>h         => toggle quick menu
+    <leader>ha        => add file to the harpoon list
+    <leader>h1        => go to file 1 in the harpoon list (key maps are configd to go to files 1 to 4)
+
+
+https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f
+https://alpha2phi.medium.com/neovim-for-beginners-packer-manager-plugin-e4d84d4c3451
+https://github.com/alpha2phi/neovim-for-beginner/blob/main/lua/plugins.lua
+
+vim:tw=78:ts=8:ft=help:norl:
