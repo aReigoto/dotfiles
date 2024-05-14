@@ -23,7 +23,7 @@
         glob: true
         path: usr-dot/jupyter/.jupyter/*
     # Link folders
-    ~/.config/nvim: usr-dot/nvim-sever/.config/nvim/
+    ~/.config/nvim: usr-dot/nvim-server/.config/nvim/
     ~/.matplotlib: usr-dot/matplotlib/.matplotlib/
 
 # Link multiple files
