@@ -7,9 +7,7 @@ require "plugins-conf"
 
 require "plugins-conf.autocommands"
 require "native-conf.commands"
-require "dev.dev"
-require "dev.spell"
-require "dev.tools"
+
 
 -- This will load a file that is ignored by git ;)
 local status_ok, npairs = pcall(require, "local-conf.options")

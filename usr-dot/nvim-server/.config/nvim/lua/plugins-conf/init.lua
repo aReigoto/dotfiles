@@ -50,29 +50,6 @@ return packer.startup(function(use)
     disable = false,
   }
 
-  use { "AlessandroYorba/Despacio",
-    config = function ()
-      vim.cmd "let g:despacio_Midnight = 1"
-      vim.cmd "colorscheme despacio"
-    end,
-    disable = true,
-  }
-
-  use { "AlessandroYorba/Alduin",
-    config = function ()
-      vim.cmd "colorscheme alduin"
-      vim.cmd "hi Normal guibg=NONE"
-      vim.cmd "hi String guibg=NONE"
-      vim.cmd "hi SignColumn guibg=NONE"
-      vim.cmd "hi LineNr guibg=NONE"
-      vim.cmd "hi VertSplit guifg=101 guibg=NONE"
-      vim.cmd "hi FloatBorder guibg=NONE"
-      vim.cmd "hi NvimTreeNormal guibg=NONE"
-      vim.cmd "hi StatusLine guibg=#282d3f"
-    end,
-    disable = true,
-  }
-
   -- File tree
   use { "kyazdani42/nvim-tree.lua",
     config = function()
@@ -94,6 +71,7 @@ return packer.startup(function(use)
     end,
     disable = false,
   }
+
   -- Multi cursor
   use { "mg979/vim-visual-multi",
     config = function()
@@ -107,33 +85,6 @@ return packer.startup(function(use)
     config = function()
       require("nvim-web-devicons").setup { default = true }
     end,
-  }
-
-  -- Show indentation, this can use treesitter check configs
-  use { "lukas-reineke/indent-blankline.nvim",
-    -- event = "BufReadPre",
-    config = function()
-      require "plugins-conf.indentblankline"
-    end,
-    wants = "nvim-treesitter",
-  }
-
-  -- Treesitter, a language parser for beterr sintax highlighting and more
-  use { "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = function()
-      require "plugins-conf.treesitter"
-    end,
-    requires = {
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
-      { "windwp/nvim-ts-autotag" },
-      { "JoosepAlviste/nvim-ts-context-commentstring" },
-      { "p00f/nvim-ts-rainbow" },
-      { "RRethy/nvim-treesitter-textsubjects" },
-      { "nvim-treesitter/playground"},
-      -- { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
-      -- { "yioneko/nvim-yati", event = "BufReadPre" },
-    },
   }
 
   -- Show open buffers
@@ -153,33 +104,6 @@ return packer.startup(function(use)
     wants = "nvim-web-devicons",
   }
 
-  -- Telescope fuzzy finder
-  use { "nvim-telescope/telescope.nvim",
-    config = function()
-      require "plugins-conf.telescope"
-    end,
-    requires = {
-      -- All the lua functions I don't want to write twice.
-      "nvim-lua/plenary.nvim",
-      -- To enable live_grep and grep_string in telescope
-      "BurntSushi/ripgrep",
-      -- Cheatsheet integrated in telescope
-      "sudormrfbin/cheatsheet.nvim",
-      -- Emoji search
-      { "xiyaowong/telescope-emoji.nvim",
-        config = function()
-          require "plugins-conf.telescope-emoji"
-        end,
-      },
-      -- Go to projects
-      { "ahmedkhalf/project.nvim",
-        config = function()
-          require "plugins-conf.project"
-        end,
-      },
-    },
-  }
-
   -- Close buffers without clossing windows
   use { "moll/vim-bbye" }
 
@@ -189,77 +113,7 @@ return packer.startup(function(use)
       require "plugins-conf.toggleterm"
     end,
   }
-  -- cmp autocompleat
-  -- The completion plugin
-  use { "hrsh7th/nvim-cmp",
-    -- event = "InsertEnter",
-    wants = { "LuaSnip" },
-    config = function()
-      require "plugins-conf.cmp"
-    end,
-    requires = {
-      -- buffer completions
-      "hrsh7th/cmp-buffer",
-      -- path completions
-      "hrsh7th/cmp-path",
-      -- Nvim lua, a nice to have for nvim configs
-      "hrsh7th/cmp-nvim-lua",
-      -- Enable lsp completions
-      "hrsh7th/cmp-nvim-lsp",
-      -- Lsp function arguments
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      -- cmp for cmdline
-      "hrsh7th/cmp-cmdline",
-      -- Source for getting completions from cmpline
-      "dmitmel/cmp-cmdline-history",
-      -- snippet completions
-      "saadparwaiz1/cmp_luasnip",
-      -- Dictionary completion
-      { "uga-rosa/cmp-dictionary",
-        ft = { "O2" },
-        config = function()
-          require "plugins-conf.cmp-dictionary"
-        end,
-      },
-      -- Snippets
-      { "L3MON4D3/LuaSnip",
-        wants = { "friendly-snippets", "vim-snippets" },
-        config = function()
-          require("snippets-conf").setup()
-        end,
-      },
-      "rafamadriz/friendly-snippets",
-      "honza/vim-snippets",
-    },
-  }
 
-  use { "neovim/nvim-lspconfig",
-    config = function()
-      -- require("lsp-c").setup()
-      require("lsp-conf")
-    end,
-    requires = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      -- "folke/lua-dev.nvim",
-      "folke/neodev.nvim",
-      -- Automatically highlighting instances current word under the cursor using LSP
-      { "RRethy/vim-illuminate",
-        config = function ()
-          require "plugins-conf.illuminate"
-        end
-      },
-      "jose-elias-alvarez/null-ls.nvim",
-    }
-  }
-
-  -- Jupyter interaction
-  use { "jupyter-vim/jupyter-vim",
-    config = function()
-      require "plugins-conf.jupyter-vim"
-    end,
-  }
   -- Customizable open window
   use { "goolord/alpha-nvim",
         config = function()
@@ -267,93 +121,8 @@ return packer.startup(function(use)
         end,
   }
 
-  -- Comments
-  use { "numToStr/Comment.nvim",
-        wants = "nvim-treesitter",
-        config = function()
-          require "plugins-conf.comment"
-        end,
-  }
-
   -- Surround "" {} []
   use { "tpope/vim-surround" }
-
-  -- Autopairs, integrates with both cmp and treesitter
-  use { "windwp/nvim-autopairs",
-        opt = true,
-        event = "InsertEnter",
-        wants = "nvim-treesitter",
-        config = function()
-          require "plugins-conf.autopairs"
-        end,
-  }
-
-  -- End wise
-  use { "RRethy/nvim-treesitter-endwise",
-        opt = true,
-        wants = "nvim-treesitter",
-        event = "InsertEnter",
-        disable = false,
-  }
-
-  -- DAP debug application protocol
-  use { "mfussenegger/nvim-dap",
-    opt = true,
-    keys = { [[<leader>d]] },
-    config = function()
-      require("plugins-conf.dap")
-    end,
-    requires = { "rcarriga/nvim-dap-ui",
-      -- "mfussenegger/nvim-dap-python",
-    }
-  }
-
-  -- Git
-  use { "lewis6991/gitsigns.nvim",
-   config = function()
-     require "plugins-conf.gitsigns"
-    end
-  }
-
-  use {
-    "karb94/neoscroll.nvim",
-    event = "BufReadPre",
-    config = function()
-      require("neoscroll").setup()
-    end,
-    disable = false,
-  }
-
-  -- Harpoon
-  use {
-    "ThePrimeagen/harpoon",
-    keys = { [[<leader>j]] },
-    module = { "harpoon", "harpoon.cmd-ui", "harpoon.mark", "harpoon.ui", "harpoon.term" },
-    wants = { "telescope.nvim" },
-    config = function()
-      require("plugins-conf.harpoon").setup()
-    end,
-  }
-
-  -- Zoom a buffer
-  use { "dhruvasagar/vim-zoom" }
-
-  use { "nyngwang/NeoZoom.lua",
-    config = function ()
-      require("plugins-conf.neo-zoom")
-    end,
-    disable = true,
-  }
-
-  -- File detect 
-  use { "aReigoto/ts-tools-o2" ,
-    -- disable = true,
-  }
-
-  -- O2 Syntax using vim
-  use { "aReigoto/o2-syntax" ,
-    disable = true,
-  }
 
 --[[
 
