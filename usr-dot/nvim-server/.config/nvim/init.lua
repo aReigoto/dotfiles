@@ -1,6 +1,6 @@
 require "native-conf.options"
 require "native-conf.keymaps"
-require "plugins-conf"
+-- require "plugins-conf"
 
 -- require "plugins-conf.nvim-surround"
 -- require "plugins-conf.grammarous"
