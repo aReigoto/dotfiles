@@ -14,14 +14,8 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   -- My plugins here
-
-  -- Colorschemes
-  use { "lunarvim/darkplus.nvim",
-    config = function ()
-      vim.cmd "colorscheme darkplus"
-    end,
-    disable = false,
-  }
+  -- use 'foo1/bar1.nvim'
+  -- use 'foo2/bar2.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
