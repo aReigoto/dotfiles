@@ -1,3 +1,5 @@
+
+ --[[
 local fn = vim.fn
 
 -- Automatically install packer
@@ -124,43 +126,9 @@ return packer.startup(function(use)
   -- Surround "" {} []
   use { "tpope/vim-surround" }
 
---[[
 
-  -- Icons for cmd
-  -- use { "onsails/lspkind" }
-
-  --  Speling and grammar check
-  use { "rhysd/vim-grammarous" }
-
-  -- Auto tag
-   use { "windwp/nvim-ts-autotag",
-    -- opt = true,
---    wants = "nvim-treesitter",
-      event = "InsertEnter",
-      config = function() 
-        require("nvim-ts-autotag").setup{ enable = true }
-      end,
-    }
-
-  -- Unicode Test
-  use { "chrisbra/unicode.vim" }
-
-  A list o plugings for nvim
-  https://nvimluau.dev/
-
-  MarkDown
-  https://github.com/nvim-neorg/neorg
-
-  Vim game
-  https://github.com/ThePrimeagen/vim-be-good
-
-  -- Speed up neovim loading time
-  use { "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" }
-
-  --]]
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
 end)
+--]]
