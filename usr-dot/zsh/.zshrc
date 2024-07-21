@@ -1,3 +1,12 @@
+# Zshell Order of execution
+
+# .zshenv is always sourced
+# .zprofile is for login shells
+# .zshrc is for interactive shells
+# .zlogin is for login shells
+# .zlogout 
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -19,7 +28,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="amuse"
 #ZSH_THEME="agnosterArc"
-# ZSH_THEME="bira"
+#ZSH_THEME="bira"
 #ZSH_THEME="intheloop"
 #ZSH_THEME="gnzh"
 #ZSH_THEME="strug"
