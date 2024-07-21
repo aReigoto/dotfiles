@@ -25,7 +25,7 @@ bufferline.setup {
         return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
       end,
     diagnostics = "nvim_lsp", -- false | "coc"
-    diagnostics_update_in_insert = true,
+    update_in_insert = true,
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
         local icon = level:match("error") and " " or " "
           return " " .. icon .. count
