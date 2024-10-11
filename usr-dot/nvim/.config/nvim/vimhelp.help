@@ -27,6 +27,7 @@ Short cut: press * to go and # to come back
   |increment|
   |decrement|
   |go-to-insert-mode|
+  |yank-movements|
   |insert-mode-features| 
   |visual-mode|
   |markers|
@@ -263,6 +264,13 @@ TODO:
     `cip`     => Change inside paragraph
     `ca(`     => Change all (inside and surrounding character) ()
     `C`       => Change to the end of the line 
+
+  |yank-movements|
+    `yi(`   =>  Yank inside ( you can use any type of brackets
+    `ya(`   =>  Yank arround ( this will include the brackets
+    `y%`    =>  Yank arround the matching brackets
+    `y_`    =>  Yank to the beggining of line
+    `y$`    =>  Yank to end of line 
 
   |insert-mode-features| keys in insert mode
     :h ins-special-keys
