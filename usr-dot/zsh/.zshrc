@@ -129,3 +129,6 @@ export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
