@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 echo -e "To edte the script run with -e flag."
 
@@ -10,7 +10,11 @@ if [[ $1 =~ '-e' ]] ; then
   exit 0
 fi
 
-pipenv run python earTraningChordsCmdL.py $@
+#pipenv run python earTraningChordsCmdL.py $@
+#conda run -n music python earTraningChordsCmdL.py $@
+conda activate music
+python earTraningChordsCmdL.py $@
+conda deactivate
 
 exit_code=$?
 
